@@ -9,7 +9,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import javax.annotation.ManagedBean;
+
+import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+
 import model.DAO.Curso.CursoDAO;
 import model.Domain.Curso.CursoDomain;
 
@@ -17,41 +22,64 @@ import model.Domain.Curso.CursoDomain;
  *
  * @author carli
  */
-@ManagedBean(value = "cursoController")
+@ManagedBean(name = "cursoController")
+@SessionScoped
 public class CursoController {
-    private CursoDomain curso = new CursoDomain();
+	private String nome;
 
-    public CursoDomain getCurso() {
-        return curso;
-    }
+	
+	public CursoController() {
 
-    public void setCurso(CursoDomain curso) {
-        this.curso = curso;
-    }
-    
-    public boolean cadastrarCurso(){
-        CursoDAO curso_dao = new CursoDAO();
-        return curso_dao.cadastrarCurso(curso);
-    }
-    
-    /**
-     *
-     * @return
-     * @throws SQLException
-     */
-    public List<CursoDomain> recuperarCurso() throws SQLException{
-        CursoDAO curso_dao = new CursoDAO();
-        CursoDomain curso;
-        
-        List<CursoDomain> lista_curso = new ArrayList();
-        ResultSet rs =  curso_dao.recuperarCurso();
-        while(rs.next()){
-            curso = new CursoDomain();
-            curso.setId(rs.getInt("id"));
-            curso.setCurso(rs.getString("curso"));
-            curso.setCampus_id(rs.getInt("campus_id"));
-            lista_curso.add(curso);
-        }
-        return lista_curso;
-    }
+	}
+
+	private CursoDomain curso = new CursoDomain();
+
+	public CursoDomain getCurso() {
+		return curso;
+	}
+
+	public void setCurso(CursoDomain curso) {
+		this.curso = curso;
+	}
+
+	public boolean cadastrarCurso() {
+		CursoDAO curso_dao = new CursoDAO();
+		return curso_dao.cadastrarCurso(curso);
+	}
+
+	/**
+	 *
+	 * @return
+	 * @throws SQLException
+	 */
+	public List<CursoDomain> recuperarCurso() throws SQLException {
+		CursoDAO curso_dao = new CursoDAO();
+		CursoDomain curso;
+
+		List<CursoDomain> lista_curso = new ArrayList();
+		ResultSet rs = curso_dao.recuperarCurso();
+		while (rs.next()) {
+			curso = new CursoDomain();
+			curso.setId(rs.getInt("id"));
+			curso.setCurso(rs.getString("curso"));
+			curso.setCampus_id(rs.getInt("campus_id"));
+			lista_curso.add(curso);
+		}
+		return lista_curso;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public void cadastrarTeste() {
+		FacesContext context = FacesContext.getCurrentInstance();
+
+		context.addMessage(null, new FacesMessage("Successful", "Nome Digitado: " + this.getNome()));
+
+	}
 }

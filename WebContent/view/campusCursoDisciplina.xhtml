@@ -9,12 +9,15 @@
 <title>Sistema CPA</title>
 </h:head>
 <h:body>
+<p:growl id="growl1" showDetail="true"  keepAlive="1000"  /> 
 	---Sistema CPA--- <br/>
         <h:form>
             <h:commandButton value="Cadastrar Campus" action="view/Campus/CadastrarCampus.xhtml"></h:commandButton> <br/><br/>
             <h:commandButton value="Cadastrar Cursos" action="CursoFacade.xhtml"></h:commandButton> <br/><br/>
             <h:commandButton value="Cadastrar Disciplinas" action="DisciplinaFacade.xhtml"></h:commandButton> <br/><br/>
-            <!--Nome: <h:inputText value="#{telaPrincipal.p.nome}"/>-->
+            <h:outputLabel>Nome:</h:outputLabel>  <h:inputText value="#{cursoController.nome}"/>
+            <h:commandButton value="Cadastrar Teste" action="#{cursoController.cadastrarTeste}"></h:commandButton> <br/><br/>
+            
         </h:form>
 </h:body>
 </html>
