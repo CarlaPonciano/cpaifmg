@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" 	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Insert title here</title>
+</h:head>
+<h:body>
+	---Sistema CPA--- <br/>
+        ---Crie sua Conta--- <br/>
+        <h:form>
+            <h:outputLabel>Nome: </h:outputLabel><h:inputText size="20" value="#{UsuarioController.usuario.nome}" /><br/>
+            <h:outputLabel>Sobrenome: </h:outputLabel><h:inputText value="#{UsuarioController.usuario.sobrenome}"/><br/>
+            <h:outputLabel>E-mail: </h:outputLabel><h:inputText value="#{UsuarioController.usuario.email}"/><br/>
+            <h:outputLabel>Nome de usuário: </h:outputLabel><h:inputText value="#{UsuarioController.usuario.usuario}"/><br/>
+            <h:outputLabel>Senha: </h:outputLabel><h:inputText value="#{UsuarioController.usuario.senha}"/><br/>
+            <h:commandButton value="Criar Conta"  actionListener="#{controlador.persistirUsuario()}"  /><br/>
+        </h:form>
+</h:body>
+</html>
