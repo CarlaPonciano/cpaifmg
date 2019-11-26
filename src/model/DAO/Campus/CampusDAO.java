@@ -10,6 +10,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import model.Domain.Campus.CampusDomain;
 
 /**
@@ -32,13 +34,22 @@ public class CampusDAO {
         }
     }
     
-    public ResultSet recuperarCampus(){
+    public List<CampusDomain> recuperarCampus(){
         String sql = "SELECT * FROM campus;";
         try{
             Connection con = ConnectionPostgreSQL.getInstance().getConnection();
             Statement stm = con.createStatement();
             ResultSet rs = stm.executeQuery(sql);
-            return rs;
+            
+            CampusDomain campus;
+            List<CampusDomain> lista_campus = new ArrayList();
+            while(rs.next()){
+                campus = new CampusDomain();
+                campus.setId(rs.getInt("id"));
+                campus.setCampus(rs.getString("campus"));
+                lista_campus.add(campus);
+            }
+            return lista_campus;
         }catch(SQLException e){
             System.out.println("Erro na recuperação dos campus cadastrados!");
             System.out.println(e.getMessage());

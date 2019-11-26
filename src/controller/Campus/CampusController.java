@@ -5,9 +5,7 @@
  */
 package controller.Campus;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.SessionScoped;
  import model.DAO.Campus.CampusDAO;
@@ -37,16 +35,7 @@ public class CampusController {
     
     public List<CampusDomain> recuperarCampus() throws SQLException{
         CampusDAO campus_dao = new CampusDAO();
-        CampusDomain campus;
-        
-        List<CampusDomain> lista_campus = new ArrayList();
-        ResultSet rs =  campus_dao.recuperarCampus();
-        while(rs.next()){
-            campus = new CampusDomain();
-            campus.setId(rs.getInt("id"));
-            campus.setCampus(rs.getString("campus"));
-            lista_campus.add(campus);
-        }
+        List<CampusDomain> lista_campus = campus_dao.recuperarCampus();
         return lista_campus;
     }
     

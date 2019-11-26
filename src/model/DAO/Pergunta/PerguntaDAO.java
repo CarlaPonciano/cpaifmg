@@ -10,7 +10,10 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import model.Connection.ConnectionPostgreSQL;
+import model.Domain.TipoPergunta.TipoPerguntaDomain;
 
 /**
  *
@@ -32,14 +35,30 @@ public class PerguntaDAO {
         }
     }
     
-    public ResultSet recuperarPerguntas(){
+    public List<PerguntaDomain> recuperarPerguntas(){
         String sql = "SELECT P.id AS P_id, P.pergunta, TP.id AS TP_id, TP.tipo FROM pergunta AS P, tipopergunta AS TP"
                     + " WHERE P.tipoPergunta_id = TP.id;";
         try{
             Connection con = ConnectionPostgreSQL.getInstance().getConnection();
             Statement stm = con.createStatement();
             ResultSet rs = stm.executeQuery(sql);
-            return rs;
+            
+            PerguntaDomain pergunta;
+            TipoPerguntaDomain tipo_pergunta;
+            List<PerguntaDomain> lista_pergunta = new ArrayList();
+            while(rs.next()){
+                pergunta = new PerguntaDomain();
+                pergunta.setId(rs.getInt("P_id"));
+                pergunta.setPergunta(rs.getString("pergunta"));
+
+                tipo_pergunta = new TipoPerguntaDomain();
+                tipo_pergunta.setId(rs.getInt("TP_id"));
+                tipo_pergunta.setTipo(rs.getString("tipo"));
+
+                pergunta.setTipoPergunta(tipo_pergunta);
+                lista_pergunta.add(pergunta);
+            }
+            return lista_pergunta;
         }catch(SQLException e){
             System.out.println("Erro na recuperação das questões!");
             System.out.println(e.getMessage());

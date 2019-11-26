@@ -6,13 +6,10 @@
 package controller.Pergunta;
 
 import java.io.Serializable;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import model.DAO.Pergunta.PerguntaDAO;
 import model.Domain.Pergunta.PerguntaDomain;
-import model.Domain.TipoPergunta.TipoPerguntaDomain;
 
 /**
  *
@@ -29,23 +26,8 @@ public class PerguntaController implements Serializable{
     
     public List<PerguntaDomain> recuperarPerguntas() throws SQLException{
         PerguntaDAO pergunta_dao = new PerguntaDAO();
-        PerguntaDomain pergunta;
-        TipoPerguntaDomain tipo_pergunta;
-        List<PerguntaDomain> lista_pergunta = new ArrayList();
         
-        ResultSet rs =  pergunta_dao.recuperarPerguntas();
-        while(rs.next()){
-            pergunta = new PerguntaDomain();
-            pergunta.setId(rs.getInt("P_id"));
-            pergunta.setPergunta(rs.getString("pergunta"));
-            
-            tipo_pergunta = new TipoPerguntaDomain();
-            tipo_pergunta.setId(rs.getInt("TP_id"));
-            tipo_pergunta.setTipo(rs.getString("tipo"));
-            
-            pergunta.setTipoPergunta(tipo_pergunta);
-            lista_pergunta.add(pergunta);
-        }
+        List<PerguntaDomain> lista_pergunta = pergunta_dao.recuperarPerguntas();
         return lista_pergunta;
     }
 }
