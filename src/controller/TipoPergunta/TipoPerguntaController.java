@@ -10,8 +10,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import javax.annotation.ManagedBean;
-import javax.enterprise.context.SessionScoped;
 import model.DAO.TipoPergunta.TipoPerguntaDAO;
 import model.Domain.TipoPergunta.TipoPerguntaDomain;
 import model.Domain.TipoResposta.TipoRespostaDomain;
@@ -20,8 +18,8 @@ import model.Domain.TipoResposta.TipoRespostaDomain;
  *
  * @author amanda
  */
-@ManagedBean(value = "tipoPerguntaController")
-@SessionScoped
+@javax.faces.bean.ManagedBean(name = "tipoPerguntaController")
+@javax.faces.bean.SessionScoped
 public class TipoPerguntaController implements Serializable{
    TipoPerguntaDomain tp;
    public List<TipoPerguntaDomain> recuperarTipoPergunta() throws SQLException{

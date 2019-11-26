@@ -6,8 +6,6 @@
 package controller.Usuario;
 
 import java.io.Serializable;
-import javax.annotation.ManagedBean;
-import javax.enterprise.context.SessionScoped;
 import model.DAO.Usuario.UsuarioDAO;
 import model.Domain.Usuario.UsuarioDomain;
 
@@ -15,8 +13,8 @@ import model.Domain.Usuario.UsuarioDomain;
  *
  * @author amanda
  */
-@ManagedBean(value = "usuarioController")
-@SessionScoped
+@javax.faces.bean.ManagedBean(name = "usuarioController")
+@javax.faces.bean.SessionScoped
 public class UsuarioController implements Serializable{
     
     private UsuarioDomain sessao = null;

@@ -5,8 +5,6 @@
  */
 package controller.Questionario;
 
-import javax.annotation.ManagedBean;
-import javax.enterprise.context.SessionScoped;
 import model.DAO.Questionario.QuestionarioDAO;
 import model.Domain.Questionario.QuestionarioDomain;
 
@@ -14,7 +12,8 @@ import model.Domain.Questionario.QuestionarioDomain;
  *
  * @author carli
  */
-@ManagedBean(value = "questionarioController")
+@javax.faces.bean.ManagedBean(name = "questionarioController")
+@javax.faces.bean.SessionScoped
 public class QuestionarioController {
     private QuestionarioDomain questionario = new QuestionarioDomain();
 

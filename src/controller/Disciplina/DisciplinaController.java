@@ -5,7 +5,7 @@
  */
 package controller.Disciplina;
 
-import javax.annotation.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import model.DAO.Disciplina.DisciplinaDAO;
 import model.Domain.Disciplina.DisciplinaDomain;
 
@@ -13,7 +13,8 @@ import model.Domain.Disciplina.DisciplinaDomain;
  *
  * @author carli
  */
-@ManagedBean(value = "disciplinaController")
+@javax.faces.bean.ManagedBean(name = "disciplinaController")
+@SessionScoped
 public class DisciplinaController {
     DisciplinaDomain disciplina = new DisciplinaDomain();
 

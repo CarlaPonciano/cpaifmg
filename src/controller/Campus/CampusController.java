@@ -8,8 +8,8 @@ package controller.Campus;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import javax.annotation.ManagedBean;
 import java.util.List;
+import javax.faces.bean.SessionScoped;
  import model.DAO.Campus.CampusDAO;
  import model.Domain.Campus.CampusDomain;
 
@@ -17,7 +17,8 @@ import java.util.List;
  *
  * @author carli
  */
-@ManagedBean(value = "campusController")
+@javax.faces.bean.ManagedBean(name = "campusController")
+@SessionScoped
 public class CampusController {
     private CampusDomain campus = new CampusDomain();
 

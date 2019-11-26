@@ -9,12 +9,13 @@
 <title>Cadastrar Questionário | Sistema CPA</title>
 </h:head>
 <h:body>
-	---Cadastrar Questionário--- <br/>
+	---Cadastrar Questionário---<br/>
         Selecione o tipo do questionário: <br/><br/>
-        <h:selectManyCheckbox value="#{tipoQuestionarioController.recuperarTipoQuestionario}">
-            <f:selectItem itemValue="#{tipoQuestionarioController.it.nome} - #{tipoQuestionarioController.it.descricao}"/>
-        </h:selectManyCheckbox>
-        
+        <h:selectOneMenu value=""   >
+            <f:selectItems value="#{tipoQuestionarioController.lista_tipo_questionario}" var="ATUAL" itemValue="#{ATUAL.id}" itemLabel="#{ATUAL.nome} - #{ATUAL.descricao}">
+            </f:selectItems>
+        </h:selectOneMenu>
+        <br/><br/>
 	Informe o nome do questionário: <h:inputText/> <br/><br/>
         Informe a descrição do questionário: <h:inputText/> <br/><br/>
         <h:commandButton value="Cadastrar Questionário" action="#{questionarioController.cadastrarQuestionario()}"></h:commandButton> <br/><br/>
