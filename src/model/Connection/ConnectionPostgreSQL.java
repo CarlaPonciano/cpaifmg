@@ -8,12 +8,15 @@ package model.Connection;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author carli
  */
 public class ConnectionPostgreSQL {
+
     private static ConnectionPostgreSQL instance;
     private static Connection connection;
 
@@ -22,19 +25,25 @@ public class ConnectionPostgreSQL {
     private static final String userName = "projeto";
     private static final String password = "projeto";
 
-    private static String url = "jdbc:postgresql://" + serverName + "/" + mydatabase
-                                + "?useTimezone=true&serverTimezone=UTC";
+    //private static String url = "jdbc:postgresql://" + serverName + "/" + mydatabase + "?useTimezone=true&serverTimezone=UTC";
+    private static String url = "jdbc:postgresql://" + serverName + "/" + mydatabase;
 
     private ConnectionPostgreSQL() {
         try {
-            ConnectionPostgreSQL.connection = (Connection) DriverManager.getConnection(url, userName, password);
+            Class.forName("org.postgresql.Driver");
+            ConnectionPostgreSQL.connection = DriverManager.getConnection(url, userName, password);
         } catch (SQLException e) {
             System.out.println("Conexao nao criada." + e.getMessage());
+        } catch (ClassNotFoundException ex) {
+            System.out.println("Conexao nao criada." + ex.getMessage());
+            Logger.getLogger(ConnectionPostgreSQL.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     public static ConnectionPostgreSQL getInstance() {
-        if (instance == null) instance = new ConnectionPostgreSQL();
+        if (instance == null) {
+            instance = new ConnectionPostgreSQL();
+        }
         return instance;
     }
 
