@@ -9,15 +9,19 @@
 <title>Cadastrar Questionário | Sistema CPA</title>
 </h:head>
 <h:body>
+<p:growl id="growl1" showDetail="true"  keepAlive="1000"  /> 
 	---Cadastrar Questionário---<br/>
-        Selecione o tipo do questionário: <br/><br/>
-        <h:selectOneMenu value=""   >
-            <f:selectItems value="#{tipoQuestionarioController.lista_tipo_questionario}" var="ATUAL" itemValue="#{ATUAL.id}" itemLabel="#{ATUAL.nome} - #{ATUAL.descricao}">
-            </f:selectItems>
-        </h:selectOneMenu>
-        <br/><br/>
-	Informe o nome do questionário: <h:inputText/> <br/><br/>
-        Informe a descrição do questionário: <h:inputText/> <br/><br/>
-        <h:commandButton value="Cadastrar Questionário" action="#{questionarioController.cadastrarQuestionario()}"></h:commandButton> <br/><br/>
+        <h:form>
+            Selecione o tipo do questionário: <br/><br/>
+            <h:selectOneMenu value="#{questionarioController.questionario.id_tipo_questionario}">
+                <f:selectItems value="#{tipoQuestionarioController.lista_tipo_questionario}" var="ATUAL" itemValue="#{ATUAL.id}" itemLabel="#{ATUAL.nome}">
+                </f:selectItems>
+            </h:selectOneMenu>
+            <br/><br/>
+            <h:outputLabel>Informe o nome do questionário: </h:outputLabel>  <h:inputText value="#{questionarioController.questionario.nome}"/> <br/><br/>
+            <h:outputLabel>Informe a descrição do questionário: </h:outputLabel>  <h:inputText value="#{questionarioController.questionario.descricao}"/> <br/><br/>
+            <h:outputLabel>Informe o nome do criador do questionário: </h:outputLabel>  <h:inputText value="#{questionarioController.questionario.criador}"/> <br/><br/>
+            <h:commandButton value="Cadastrar Questionário" action="#{questionarioController.cadastrarQuestionario()}"></h:commandButton> <br/><br/> <br/><br/>
+        </h:form>
 </h:body>
 </html>

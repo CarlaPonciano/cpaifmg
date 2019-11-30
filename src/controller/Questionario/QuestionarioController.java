@@ -5,6 +5,11 @@
  */
 package controller.Questionario;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+
 import model.DAO.Questionario.QuestionarioDAO;
 import model.Domain.Questionario.QuestionarioDomain;
 
@@ -12,21 +17,30 @@ import model.Domain.Questionario.QuestionarioDomain;
  *
  * @author carli
  */
-@javax.faces.bean.ManagedBean(name = "questionarioController")
-@javax.faces.bean.SessionScoped
+@ManagedBean(name = "questionarioController")
+@SessionScoped
 public class QuestionarioController {
-    private QuestionarioDomain questionario = new QuestionarioDomain();
+    private QuestionarioDomain questionario;
 
-    public QuestionarioDomain getQuestionario() {
-        return questionario;
+    public QuestionarioController() {
+        questionario = new QuestionarioDomain();
     }
-
+    
     public void setQuestionario(QuestionarioDomain questionario) {
         this.questionario = questionario;
     }
     
-    public boolean cadastrarQuestionario(){
+    public QuestionarioDomain getQuestionario() {
+        return questionario;
+    }
+    
+    public void cadastrarQuestionario(){
         QuestionarioDAO questionario_dao = new QuestionarioDAO();
-        return questionario_dao.cadastrarQuestionario(questionario);
+        FacesContext context = FacesContext.getCurrentInstance();
+        if(questionario_dao.cadastrarQuestionario(questionario)){
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Sucesso", "Questionário cadastrado com sucesso!"));
+        }else{
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"ERRO", "Erro no cadastro do questionário!"));
+        }
     }
 }
