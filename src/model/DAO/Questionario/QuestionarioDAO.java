@@ -36,6 +36,24 @@ public class QuestionarioDAO {
         }
     }
     
+    public boolean atualizarQuestionario(QuestionarioDomain questionario){
+        String sql = "UPDATE questionario SET (nome, descricao, Usuario_usuario, TipoQuestionario_id) =  "
+                        + "('" + questionario.getNome() + "', '" + questionario.getDescricao() + "', '"
+                        + questionario.getCriador() + "', " + questionario.getId_tipo_questionario() + ") WHERE id = " + questionario.getId() + ";";
+        System.out.println(sql);
+        try{
+            Connection con = ConnectionPostgreSQL.getInstance().getConnection();
+            Statement stm = con.createStatement();
+            stm.executeUpdate(sql);
+            return true;
+        }catch(SQLException e){
+            System.out.println("Erro na atualização do questionário!");
+            System.out.println(sql);
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+    
     public boolean excluirQuestionario(int id){
         String sql = "DELETE FROM questionario WHERE id = " + id + ";";
         try{

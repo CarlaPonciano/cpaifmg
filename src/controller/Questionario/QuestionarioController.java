@@ -24,6 +24,7 @@ import model.Domain.Questionario.QuestionarioDomain;
 public class QuestionarioController {
     private QuestionarioDomain questionario;
     private List<QuestionarioDomain> lista_questionario = new ArrayList();
+    private int id_questionario_editar;
 
     public QuestionarioController() {
         questionario = new QuestionarioDomain();
@@ -45,6 +46,14 @@ public class QuestionarioController {
     public void setLista_questionario(List<QuestionarioDomain> lista_questionario) {
         this.lista_questionario = lista_questionario;
     }
+
+    public int getId_questionario_editar() {
+        return id_questionario_editar;
+    }
+
+    public void setId_questionario_editar(int id_questionario_editar) {
+        this.id_questionario_editar = id_questionario_editar;
+    }
     
     public void cadastrarQuestionario(){
         QuestionarioDAO questionario_dao = new QuestionarioDAO();
@@ -63,6 +72,17 @@ public class QuestionarioController {
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Sucesso", "Questionário excluído com sucesso!"));
         }else{
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"ERRO", "Erro na exclusão do questionário!"));
+        }
+    }
+    
+    public void atualizarQuestionario(){
+        questionario.setId(id_questionario_editar);
+        QuestionarioDAO questionario_dao = new QuestionarioDAO();
+        FacesContext context = FacesContext.getCurrentInstance();
+        if(questionario_dao.atualizarQuestionario(questionario)){
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Sucesso", "Questionário atualizado com sucesso!"));
+        }else{
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"ERRO", "Erro na atualização do questionário!"));
         }
     }
     
