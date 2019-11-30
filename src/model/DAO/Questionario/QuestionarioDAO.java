@@ -40,7 +40,6 @@ public class QuestionarioDAO {
         String sql = "UPDATE questionario SET (nome, descricao, Usuario_usuario, TipoQuestionario_id) =  "
                         + "('" + questionario.getNome() + "', '" + questionario.getDescricao() + "', '"
                         + questionario.getCriador() + "', " + questionario.getId_tipo_questionario() + ") WHERE id = " + questionario.getId() + ";";
-        System.out.println(sql);
         try{
             Connection con = ConnectionPostgreSQL.getInstance().getConnection();
             Statement stm = con.createStatement();

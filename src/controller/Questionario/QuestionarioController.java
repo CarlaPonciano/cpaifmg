@@ -5,8 +5,13 @@
  */
 package controller.Questionario;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -55,14 +60,29 @@ public class QuestionarioController {
         this.id_questionario_editar = id_questionario_editar;
     }
     
-    public void cadastrarQuestionario(){
+    public void cadastrarQuestionario() throws IOException, InterruptedException{
         QuestionarioDAO questionario_dao = new QuestionarioDAO();
         FacesContext context = FacesContext.getCurrentInstance();
         if(questionario_dao.cadastrarQuestionario(questionario)){
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Sucesso", "Questionário cadastrado com sucesso!"));
+            
         }else{
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"ERRO", "Erro no cadastro do questionário!"));
         }
+        recuperarQuestionarios();
+        
+        Timer timer = null;
+        timer = new Timer();
+        TimerTask tarefa = new TimerTask() {
+            public void run() {
+                try {
+                    FacesContext.getCurrentInstance().getExternalContext().redirect("inicial.xhtml");
+                } catch (IOException ex) {
+                    Logger.getLogger(QuestionarioController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        };
+        timer.schedule(tarefa, 100);
     }
     
     public void excluirQuestionario(int id){
@@ -73,6 +93,7 @@ public class QuestionarioController {
         }else{
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"ERRO", "Erro na exclusão do questionário!"));
         }
+        recuperarQuestionarios();
     }
     
     public void atualizarQuestionario(){
@@ -84,6 +105,7 @@ public class QuestionarioController {
         }else{
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"ERRO", "Erro na atualização do questionário!"));
         }
+        recuperarQuestionarios();
     }
     
     public List<QuestionarioDomain> recuperarQuestionarios(){
