@@ -6,8 +6,16 @@
 package controller.Campus;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+
  import model.DAO.Campus.CampusDAO;
  import model.Domain.Campus.CampusDomain;
 
@@ -15,10 +23,16 @@ import javax.faces.bean.SessionScoped;
  *
  * @author carli
  */
-@javax.faces.bean.ManagedBean(name = "campusController")
+@ManagedBean(name = "campusController")
 @SessionScoped
 public class CampusController {
-    private CampusDomain campus = new CampusDomain();
+    private CampusDomain campus;
+    private List<CampusDomain> lista_campus = new ArrayList();
+    
+    public CampusController() {
+        campus = new CampusDomain();
+        recuperarCampus();
+    }
 
     public CampusDomain getCampus() {
         return campus;
@@ -27,15 +41,28 @@ public class CampusController {
     public void setCampus(CampusDomain campus) {
         this.campus = campus;
     }
-    
-    public boolean cadastrarCampus(){
-        CampusDAO campus_dao = new CampusDAO();
-        return campus_dao.cadastrarCampus(campus);
+
+    public List<CampusDomain> getListaCampus() {
+        return lista_campus;
+    }
+
+    public void setListaCampus(List<CampusDomain> lista_campus) {
+        this.lista_campus = lista_campus;
     }
     
-    public List<CampusDomain> recuperarCampus() throws SQLException{
+    public void cadastrarCampus(){
         CampusDAO campus_dao = new CampusDAO();
-        List<CampusDomain> lista_campus = campus_dao.recuperarCampus();
+        FacesContext context = FacesContext.getCurrentInstance();
+        if(campus_dao.cadastrarCampus(campus)){
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Sucesso", "Campus cadastrado com sucesso!"));
+        }else{
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"ERRO", "Erro no cadastro do campus!"));
+        }
+    }
+    
+    public List<CampusDomain> recuperarCampus(){
+        CampusDAO campus_dao = new CampusDAO();
+        setListaCampus(campus_dao.recuperarCampus());
         return lista_campus;
     }
     

@@ -9,13 +9,18 @@
 <title>Cadastrar Disciplina | Sistema CPA</title>
 </h:head>
 <h:body>
-	---Cadastrar Disciplina--- <br/>
-        Selecione o curso desejado: <br/><br/>
-        <h:selectManyCheckbox value="#{cursoController.recuperarCurso}">
-            <f:selectItem itemValue="#{disciplinaController.disciplina.curso_id}" itemLabel="#{cursoController.curso.curso}"/>
-        </h:selectManyCheckbox>
-        Informe o nome da disciplina:  <h:inputText value="#{disciplinaController.disciplina.disciplina}"/> <br/><br/>
-        Informe o período da disciplina: <h:inputText value="#{disciplinaController.disciplina.periodo}"/> <br/><br/>
-        <h:commandButton value="Cadastrar Disciplina" action="#{disciplinaController.cadastrarDisciplina()}"></h:commandButton> <br/><br/>
+<p:growl id="growl1" showDetail="true"  keepAlive="1000"  /> 
+     ---Cadastrar Disciplina--- <br/>
+     <h:form>
+         Selecione o curso desejado: <br/><br/>
+         <h:selectOneMenu value="#{disciplinaController.disciplina.curso_id}">
+             <f:selectItems value="#{cursoController.lista_curso}" var="ATUAL" itemValue="#{ATUAL.id}" itemLabel="#{ATUAL.nome}">
+             </f:selectItems>
+         </h:selectOneMenu>
+         <br/><br/>
+         <h:outputLabel>Informe o nome da disciplina: </h:outputLabel>  <h:inputText value="#{disciplinaController.disciplina.disciplina}"/> <br/><br/>
+         <h:outputLabel>Informe o período da disciplina: </h:outputLabel>  <h:inputText value="#{disciplinaController.disciplina.periodo}"/> <br/><br/>
+         <h:commandButton value="Cadastrar Disciplina" action="#{disciplinaController.cadastrarDisciplina()}"></h:commandButton> <br/><br/> <br/><br/>
+     </h:form>
 </h:body>
 </html>

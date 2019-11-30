@@ -9,12 +9,17 @@
 <title>Cadastrar Curso | Sistema CPA</title>
 </h:head>
 <h:body>
-	---Cadastrar Curso--- <br/>
-        Selecione o Campus desejado: <br/><br/>
-        <h:selectManyCheckbox value="#{campusController.recuperarCampus}">
-            <f:selectItem itemValue="#{cursoController.curso.campus_id}" itemLabel="#{campusController.campus.campus}"/>
-        </h:selectManyCheckbox>
-        Informe o nome do curso: <h:inputText value="#{cursoController.curso.curso}"/> <br/><br/>
-        <h:commandButton value="Cadastrar Curso" action="#{cursoController.cadastrarCurso()}"></h:commandButton> <br/><br/>
+<p:growl id="growl1" showDetail="true"  keepAlive="1000"  /> 
+     ---Cadastrar Curso--- <br/>
+     <h:form>
+         Selecione o Campus desejado: <br/><br/>
+         <h:selectOneMenu value="#{cursoController.curso.campus_id}">
+             <f:selectItems value="#{campusController.listaCampus}" var="ATUAL" itemValue="#{ATUAL.id}" itemLabel="#{ATUAL.campus}">
+             </f:selectItems>
+         </h:selectOneMenu>
+         <br/><br/>
+         <h:outputLabel>Informe o nome do curso: </h:outputLabel>  <h:inputText value="#{cursoController.curso.curso}"/> <br/><br/>
+         <h:commandButton value="Cadastrar Curso" action="#{cursoController.cadastrarCurso()}"></h:commandButton> <br/><br/> <br/><br/>
+     </h:form>
 </h:body>
 </html>

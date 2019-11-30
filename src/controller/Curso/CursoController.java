@@ -6,6 +6,7 @@
 package controller.Curso;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
@@ -23,51 +24,42 @@ import model.Domain.Curso.CursoDomain;
 @ManagedBean(name = "cursoController")
 @SessionScoped
 public class CursoController {
-	private String nome;
+    private CursoDomain curso = new CursoDomain();
+    private List<CursoDomain> lista_curso = new ArrayList();
+    
+    public CursoController() {
 
-	
-	public CursoController() {
+    }
+    
+    public CursoDomain getCurso() {
+            return curso;
+    }
 
-	}
+    public void setCurso(CursoDomain curso) {
+            this.curso = curso;
+    }
 
-	private CursoDomain curso = new CursoDomain();
+    public List<CursoDomain> getLista_curso() {
+        return lista_curso;
+    }
 
-	public CursoDomain getCurso() {
-		return curso;
-	}
+    public void setLista_curso(List<CursoDomain> lista_curso) {
+        this.lista_curso = lista_curso;
+    }
 
-	public void setCurso(CursoDomain curso) {
-		this.curso = curso;
-	}
-
-	public boolean cadastrarCurso() {
-		CursoDAO curso_dao = new CursoDAO();
-		return curso_dao.cadastrarCurso(curso);
-	}
-
-	/**
-	 *
-	 * @return
-	 * @throws SQLException
-	 */
-	public List<CursoDomain> recuperarCurso() throws SQLException {
-            CursoDAO curso_dao = new CursoDAO();
-            List<CursoDomain> lista_curso = curso_dao.recuperarCurso();
-            return lista_curso;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public void cadastrarTeste() {
-		FacesContext context = FacesContext.getCurrentInstance();
-
-		context.addMessage(null, new FacesMessage("Successful", "Nome Digitado: " + this.getNome()));
-
-	}
+    public void cadastrarCurso() {
+        CursoDAO curso_dao = new CursoDAO();
+        FacesContext context = FacesContext.getCurrentInstance();
+        if(curso_dao.cadastrarCurso(curso)){
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Sucesso", "Curso cadastrado com sucesso!"));
+        }else{
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"ERRO", "Erro no cadastro do curso!"));
+        }
+    }
+    
+    public List<CursoDomain> recuperarCurso() throws SQLException {
+        CursoDAO curso_dao = new CursoDAO();
+        setLista_curso(curso_dao.recuperarCurso());
+        return lista_curso;
+    }
 }

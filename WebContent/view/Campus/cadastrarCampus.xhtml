@@ -9,8 +9,11 @@
 <title>Cadastrar Campus | Sistema CPA</title>
 </h:head>
 <h:body>
-	---Cadastrar Campus--- <br/>
-        Informe o nome do campus: <h:inputText value="#{campusController.campus.campus}"/> <br/><br/>
-        <h:commandButton value="Cadastrar Campus" action="#{campusController.cadastrarCampus()}"></h:commandButton> <br/><br/>
+<p:growl id="growl1" showDetail="true"  keepAlive="1000"  /> 
+    ---Cadastrar Campus--- <br/>
+    <h:form>
+        <h:outputLabel>Informe o nome do campus: </h:outputLabel>  <h:inputText value="#{campusController.campus.campus}"/> <br/><br/>
+        <h:commandButton value="Cadastrar Campus" action="#{campusController.cadastrarCampus()}"></h:commandButton> <br/><br/> <br/><br/>
+    </h:form>
 </h:body>
 </html>
