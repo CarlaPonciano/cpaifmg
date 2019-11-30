@@ -36,6 +36,21 @@ public class QuestionarioDAO {
         }
     }
     
+    public boolean excluirQuestionario(int id){
+        String sql = "DELETE FROM questionario WHERE id = " + id + ";";
+        try{
+            Connection con = ConnectionPostgreSQL.getInstance().getConnection();
+            Statement stm = con.createStatement();
+            stm.executeUpdate(sql);
+            return true;
+        }catch(SQLException e){
+            System.out.println("Erro na exclusão do questionário!");
+            System.out.println(sql);
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+    
     public List<QuestionarioDomain> recuperarQuestionarios(){
         String sql = "SELECT * FROM questionario_tipoquestionario;";
         try{

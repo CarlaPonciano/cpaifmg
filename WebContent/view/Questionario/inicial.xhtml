@@ -10,6 +10,7 @@
 </h:head>
 <h:body>
 	---Questionário---<br/><br/>
+        <h:commandButton value="Cadastrar" action="cadastrarQuestionario.xhtml"></h:commandButton><br/><br/>
         <h:form>
             <!--Tabela listando os questionário cadastrados-->
             <p:dataTable var="ATUAL" value="#{questionarioController.lista_questionario}">
@@ -34,8 +35,8 @@
                 </p:column>
                 
                 <p:column headerText="Ações">
-                    <h:commandButton value="Editar" action="Questionario/cadastrarQuestionario.xhtml"></h:commandButton> .
-                    <h:commandButton value="Excluir" action="Pergunta/cadastrarPergunta.xhtml"></h:commandButton>
+                    <h:commandButton value="Editar" action="editarQuestionario.xhtml"></h:commandButton> .
+                    <h:commandButton value="Excluir" action="#{questionarioController.excluirQuestionario(ATUAL.id)}"></h:commandButton>
                 </p:column>
             </p:dataTable> <br/><br/>
         </h:form>

@@ -56,6 +56,16 @@ public class QuestionarioController {
         }
     }
     
+    public void excluirQuestionario(int id){
+        QuestionarioDAO questionario_dao = new QuestionarioDAO();
+        FacesContext context = FacesContext.getCurrentInstance();
+        if(questionario_dao.excluirQuestionario(id)){
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Sucesso", "Questionário excluído com sucesso!"));
+        }else{
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"ERRO", "Erro na exclusão do questionário!"));
+        }
+    }
+    
     public List<QuestionarioDomain> recuperarQuestionarios(){
         QuestionarioDAO questionario_dao = new QuestionarioDAO();
         setLista_questionario(questionario_dao.recuperarQuestionarios());
