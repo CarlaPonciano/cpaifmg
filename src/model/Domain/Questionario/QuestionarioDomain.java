@@ -18,6 +18,7 @@ public class QuestionarioDomain {
     private String descricao;
     private String criador;
     private int id_tipo_questionario;
+    private String tipo_questionario;
     private List<RespostaQuestionario> resposta_questionario;
 
     public QuestionarioDomain() {}
@@ -65,6 +66,14 @@ public class QuestionarioDomain {
 
     public int getId_tipo_questionario() {
         return id_tipo_questionario;
+    }
+
+    public String getTipo_questionario() {
+        return tipo_questionario;
+    }
+
+    public void setTipo_questionario(String tipo_questionario) {
+        this.tipo_questionario = tipo_questionario;
     }
 
     public void setId_tipo_questionario(int id_tipo_questionario) {

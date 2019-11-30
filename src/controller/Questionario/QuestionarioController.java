@@ -5,6 +5,8 @@
  */
 package controller.Questionario;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -21,9 +23,11 @@ import model.Domain.Questionario.QuestionarioDomain;
 @SessionScoped
 public class QuestionarioController {
     private QuestionarioDomain questionario;
+    private List<QuestionarioDomain> lista_questionario = new ArrayList();
 
     public QuestionarioController() {
         questionario = new QuestionarioDomain();
+        recuperarQuestionarios();
     }
     
     public void setQuestionario(QuestionarioDomain questionario) {
@@ -32,6 +36,14 @@ public class QuestionarioController {
     
     public QuestionarioDomain getQuestionario() {
         return questionario;
+    }
+
+    public List<QuestionarioDomain> getLista_questionario() {
+        return lista_questionario;
+    }
+
+    public void setLista_questionario(List<QuestionarioDomain> lista_questionario) {
+        this.lista_questionario = lista_questionario;
     }
     
     public void cadastrarQuestionario(){
@@ -42,5 +54,11 @@ public class QuestionarioController {
         }else{
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"ERRO", "Erro no cadastro do questionário!"));
         }
+    }
+    
+    public List<QuestionarioDomain> recuperarQuestionarios(){
+        QuestionarioDAO questionario_dao = new QuestionarioDAO();
+        setLista_questionario(questionario_dao.recuperarQuestionarios());
+        return lista_questionario;
     }
 }

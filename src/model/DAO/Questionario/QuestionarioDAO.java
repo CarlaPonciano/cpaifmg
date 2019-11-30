@@ -7,8 +7,11 @@ package model.DAO.Questionario;
 
 import model.Domain.Questionario.QuestionarioDomain;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import model.Connection.ConnectionPostgreSQL;
 
 /**
@@ -30,6 +33,32 @@ public class QuestionarioDAO {
             System.out.println(sql);
             System.out.println(e.getMessage());
             return false;
+        }
+    }
+    
+    public List<QuestionarioDomain> recuperarQuestionarios(){
+        String sql = "SELECT * FROM questionario_tipoquestionario;";
+        try{
+            Connection con = ConnectionPostgreSQL.getInstance().getConnection();
+            Statement stm = con.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            
+            QuestionarioDomain questionario;
+            List<QuestionarioDomain> lista_questionario = new ArrayList();
+            while(rs.next()){
+                questionario = new QuestionarioDomain();
+                questionario.setId(rs.getInt("id"));
+                questionario.setNome(rs.getString("nome"));
+                questionario.setDescricao(rs.getString("descricao"));
+                questionario.setCriador(rs.getString("usuario_usuario"));
+                questionario.setTipo_questionario(rs.getString("tipo_questionario"));
+                lista_questionario.add(questionario);
+            }
+            return lista_questionario;
+        }catch(SQLException e){
+            System.out.println("Erro na recuperação dos questionários!");
+            System.out.println(e.getMessage());
+            return null;
         }
     }
 }
