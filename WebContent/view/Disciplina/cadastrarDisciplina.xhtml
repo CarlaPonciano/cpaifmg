@@ -14,7 +14,7 @@
      <h:form>
          Selecione o curso desejado: <br/><br/>
          <h:selectOneMenu value="#{disciplinaController.disciplina.curso_id}">
-             <f:selectItems value="#{cursoController.lista_curso}" var="ATUAL" itemValue="#{ATUAL.id}" itemLabel="#{ATUAL.nome}">
+             <f:selectItems value="#{cursoController.lista_curso}" var="ATUAL" itemValue="#{ATUAL.id}" itemLabel="#{ATUAL.curso}">
              </f:selectItems>
          </h:selectOneMenu>
          <br/><br/>

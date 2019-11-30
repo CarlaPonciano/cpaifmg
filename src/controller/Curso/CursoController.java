@@ -5,7 +5,6 @@
  */
 package controller.Curso;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +27,7 @@ public class CursoController {
     private List<CursoDomain> lista_curso = new ArrayList();
     
     public CursoController() {
-
+        recuperarCurso();
     }
     
     public CursoDomain getCurso() {
@@ -57,7 +56,7 @@ public class CursoController {
         }
     }
     
-    public List<CursoDomain> recuperarCurso() throws SQLException {
+    public List<CursoDomain> recuperarCurso(){
         CursoDAO curso_dao = new CursoDAO();
         setLista_curso(curso_dao.recuperarCurso());
         return lista_curso;

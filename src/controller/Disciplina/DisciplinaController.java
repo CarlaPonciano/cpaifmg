@@ -5,7 +5,11 @@
  */
 package controller.Disciplina;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+
 import model.DAO.Disciplina.DisciplinaDAO;
 import model.Domain.Disciplina.DisciplinaDomain;
 
@@ -13,10 +17,13 @@ import model.Domain.Disciplina.DisciplinaDomain;
  *
  * @author carli
  */
-@javax.faces.bean.ManagedBean(name = "disciplinaController")
+@ManagedBean(name = "disciplinaController")
 @SessionScoped
 public class DisciplinaController {
     DisciplinaDomain disciplina = new DisciplinaDomain();
+    
+    public DisciplinaController() {
+    }
 
     public DisciplinaDomain getDisciplina() {
         return disciplina;
@@ -26,8 +33,13 @@ public class DisciplinaController {
         this.disciplina = disciplina;
     }
     
-    public boolean cadastrarDisciplina(){
+    public void cadastrarDisciplina(){
         DisciplinaDAO disciplina_dao = new DisciplinaDAO();
-        return disciplina_dao.cadastrarDisciplina(disciplina);
+        FacesContext context = FacesContext.getCurrentInstance();
+        if(disciplina_dao.cadastrarDisciplina(disciplina)){
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Sucesso", "Disciplina cadastrada com sucesso!"));
+        }else{
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"ERRO", "Erro no cadastro da disciplina!"));
+        }
     }
 }
