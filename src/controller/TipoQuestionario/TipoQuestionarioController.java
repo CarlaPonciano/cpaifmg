@@ -66,4 +66,16 @@ public class TipoQuestionarioController {
         }
         recuperarTipoQuestionario();
     }
+    
+    public void excluirQuestionario(int id) throws IOException{
+        TipoQuestionarioDAO tipo_questionario_dao = new TipoQuestionarioDAO();
+        FacesContext context = FacesContext.getCurrentInstance();
+        if(tipo_questionario_dao.excluirTipoQuestionario(id)){
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Sucesso", "Tipo do questionário excluído com sucesso!"));
+            FacesContext.getCurrentInstance().getExternalContext().redirect("inicial.xhtml");
+        }else{
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"ERRO", "Erro na exclusão do tipo do questionário!"));
+        }
+        recuperarTipoQuestionario();
+    }
 }
