@@ -53,6 +53,23 @@ public class TipoQuestionarioDAO {
         }
     }
     
+    public boolean atualizarTipoQuestionario(TipoQuestionarioDomain tipo_questionario){
+        String sql = "UPDATE tipoquestionario SET (nome, descricao, tipopergunta_id) =  "
+                        + "('" + tipo_questionario.getNome() + "', '" + tipo_questionario.getDescricao() + "', "
+                        + tipo_questionario.getTipo_pergunta_id() + ") WHERE id = " + tipo_questionario.getId() + ";";
+        try{
+            Connection con = ConnectionPostgreSQL.getInstance().getConnection();
+            Statement stm = con.createStatement();
+            stm.executeUpdate(sql);
+            return true;
+        }catch(SQLException e){
+            System.out.println("Erro na atualização do tipo do questionário!");
+            System.out.println(sql);
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+    
     public List<TipoQuestionarioDomain> recuperarTipoQuestionario(){
         String sql = "SELECT * FROM tipoquestionario_tipopergunta_tiporesposta;";
         try{

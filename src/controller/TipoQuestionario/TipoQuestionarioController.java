@@ -5,6 +5,7 @@
  */
 package controller.TipoQuestionario;
 
+import controller.Questionario.QuestionarioController;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -28,6 +29,7 @@ import model.Domain.TipoQuestionario.TipoQuestionarioDomain;
 public class TipoQuestionarioController {
     private List<TipoQuestionarioDomain> lista_tipo_questionario = new ArrayList();
     private TipoQuestionarioDomain tipo_questionario = new TipoQuestionarioDomain();
+    private int id_tipo_questionario_editar;
     
     public TipoQuestionarioController() {
         recuperarTipoQuestionario();
@@ -55,6 +57,14 @@ public class TipoQuestionarioController {
         this.tipo_questionario = tipo_questionario;
     }
 
+    public int getId_tipo_questionario_editar() {
+        return id_tipo_questionario_editar;
+    }
+
+    public void setId_tipo_questionario_editar(int id_tipo_questionario_editar) {
+        this.id_tipo_questionario_editar = id_tipo_questionario_editar;
+    }
+
     public void cadastrarTipoQuestionario() throws IOException, InterruptedException{
         TipoQuestionarioDAO tipo_questionario_dao = new TipoQuestionarioDAO();
         FacesContext context = FacesContext.getCurrentInstance();
@@ -77,5 +87,19 @@ public class TipoQuestionarioController {
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"ERRO", "Erro na exclusão do tipo do questionário!"));
         }
         recuperarTipoQuestionario();
+    }
+    
+    public void atualizarTipoQuestionario() throws IOException{
+        tipo_questionario.setId(id_tipo_questionario_editar);
+        TipoQuestionarioDAO tipo_questionario_dao = new TipoQuestionarioDAO();
+        FacesContext context = FacesContext.getCurrentInstance();
+        if(tipo_questionario_dao.atualizarTipoQuestionario(tipo_questionario)){
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Sucesso", "Tipo do questionário atualizado com sucesso!"));
+            FacesContext.getCurrentInstance().getExternalContext().redirect("inicial.xhtml");
+        }else{
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"ERRO", "Erro na atualização do tipo do questionário!"));
+        }
+        recuperarTipoQuestionario();
+        QuestionarioController.recuperarQuestionarios();
     }
 }

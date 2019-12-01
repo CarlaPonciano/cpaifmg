@@ -6,22 +6,21 @@
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Editar Questionário | Sistema CPA</title>
+<title>Editar Tipo Questionário | Sistema CPA</title>
 </h:head>
 <h:body>
 <p:growl id="growl1" showDetail="true"  keepAlive="1000"  /> 
-	---Editar Questionário---<br/>
+	---Editar Tipo Questionário---<br/>
         <h:form>
-            Selecione o tipo do questionário: <br/><br/>
-            <h:selectOneMenu value="#{questionarioController.questionario.id_tipo_questionario}">
-                <f:selectItems value="#{tipoQuestionarioController.lista_tipo_questionario}" var="ATUAL" itemValue="#{ATUAL.id}" itemLabel="#{ATUAL.nome}">
+            Selecione o tipo da pergunta: <br/><br/>
+            <h:selectOneMenu value="#{tipoQuestionarioController.tipo_questionario.tipo_pergunta_id}">
+                <f:selectItems value="#{tipoPerguntaController.lista_tipo_pergunta}" var="ATUAL" itemValue="#{ATUAL.id}" itemLabel="#{ATUAL.tipo}">
                 </f:selectItems>
             </h:selectOneMenu>
             <br/><br/>
-            <h:outputLabel>Informe o nome do questionário: </h:outputLabel>  <h:inputText value="#{questionarioController.questionario.nome}"/> <br/><br/>
-            <h:outputLabel>Informe a descrição do questionário: </h:outputLabel>  <h:inputText value="#{questionarioController.questionario.descricao}"/> <br/><br/>
-            <h:outputLabel>Informe o nome do criador do questionário: </h:outputLabel>  <h:inputText value="#{questionarioController.questionario.criador}"/> <br/><br/>
-            <h:commandButton value="Atualizar Questionário" action="#{questionarioController.atualizarQuestionario()}"></h:commandButton> <br/><br/> <br/><br/>
+            <h:outputLabel>Informe o nome do tipo do questionário: </h:outputLabel>  <h:inputText value="#{tipoQuestionarioController.tipo_questionario.nome}"/> <br/><br/>
+            <h:outputLabel>Informe a descrição do tipo do questionário: </h:outputLabel>  <h:inputText value="#{tipoQuestionarioController.tipo_questionario.descricao}"/> <br/><br/>
+            <h:commandButton value="Atualizar Questionário" action="#{tipoQuestionarioController.atualizarTipoQuestionario()}"></h:commandButton> <br/><br/> <br/><br/>
         </h:form>
 </h:body>
 </html>

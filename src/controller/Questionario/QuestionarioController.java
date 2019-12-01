@@ -28,7 +28,7 @@ import model.Domain.Questionario.QuestionarioDomain;
 @SessionScoped
 public class QuestionarioController {
     private QuestionarioDomain questionario;
-    private List<QuestionarioDomain> lista_questionario = new ArrayList();
+    private static List<QuestionarioDomain> lista_questionario = new ArrayList();
     private int id_questionario_editar;
 
     public QuestionarioController() {
@@ -48,8 +48,8 @@ public class QuestionarioController {
         return lista_questionario;
     }
 
-    public void setLista_questionario(List<QuestionarioDomain> lista_questionario) {
-        this.lista_questionario = lista_questionario;
+    static void setLista_questionario(List<QuestionarioDomain> set_lista_questionario) {
+        lista_questionario = set_lista_questionario;
     }
 
     public int getId_questionario_editar() {
@@ -97,7 +97,7 @@ public class QuestionarioController {
         recuperarQuestionarios();
     }
     
-    public List<QuestionarioDomain> recuperarQuestionarios(){
+    public static List<QuestionarioDomain> recuperarQuestionarios(){
         QuestionarioDAO questionario_dao = new QuestionarioDAO();
         setLista_questionario(questionario_dao.recuperarQuestionarios());
         return lista_questionario;
