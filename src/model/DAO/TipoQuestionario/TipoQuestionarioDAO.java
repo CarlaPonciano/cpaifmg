@@ -21,6 +21,23 @@ import model.Domain.TipoQuestionario.TipoQuestionarioDomain;
  */
 public class TipoQuestionarioDAO {
     
+    public boolean cadastrarTipoQuestionario(TipoQuestionarioDomain tipo_questionario){
+        String sql = "INSERT INTO tipoquestionario(nome, descricao, tipopergunta_id) VALUES "
+                        + "('" + tipo_questionario.getNome() + "', '" + tipo_questionario.getDescricao() + "', "
+                        + tipo_questionario.getTipo_pergunta_id() + ");";
+        try{
+            Connection con = ConnectionPostgreSQL.getInstance().getConnection();
+            Statement stm = con.createStatement();
+            stm.executeUpdate(sql);
+            return true;
+        }catch(SQLException e){
+            System.out.println("Erro no cadastro do tipo do questionário!");
+            System.out.println(sql);
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+    
     public List<TipoQuestionarioDomain> recuperarTipoQuestionario(){
         String sql = "SELECT * FROM tipoQuestionario;";
         try{

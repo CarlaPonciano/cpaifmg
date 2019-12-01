@@ -7,6 +7,7 @@ package controller.TipoPergunta;
 
 import java.io.Serializable;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import model.DAO.TipoPergunta.TipoPerguntaDAO;
 import model.Domain.TipoPergunta.TipoPerguntaDomain;
@@ -17,11 +18,24 @@ import model.Domain.TipoPergunta.TipoPerguntaDomain;
  */
 @javax.faces.bean.ManagedBean(name = "tipoPerguntaController")
 @javax.faces.bean.SessionScoped
-public class TipoPerguntaController implements Serializable{
+public class TipoPerguntaController{
+    private List<TipoPerguntaDomain> lista_tipo_pergunta = new ArrayList();
+
+    public TipoPerguntaController() {
+        recuperarTipoPergunta();
+    }
+
+    public List<TipoPerguntaDomain> getLista_tipo_pergunta() {
+        return lista_tipo_pergunta;
+    }
+
+    public void setLista_tipo_pergunta(List<TipoPerguntaDomain> lista_tipo_pergunta) {
+        this.lista_tipo_pergunta = lista_tipo_pergunta;
+    }
     
-   public List<TipoPerguntaDomain> recuperarTipoPergunta() throws SQLException{
+    public List<TipoPerguntaDomain> recuperarTipoPergunta(){
         TipoPerguntaDAO tipo_pergunta_dao = new TipoPerguntaDAO();
-        List<TipoPerguntaDomain> lista_tipo_pergunta = tipo_pergunta_dao.recuperarTipoPergunta();
+        setLista_tipo_pergunta(tipo_pergunta_dao.recuperarTipoPergunta());
         return lista_tipo_pergunta;
     } 
    

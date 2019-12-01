@@ -74,7 +74,6 @@ public class QuestionarioDAO {
             Connection con = ConnectionPostgreSQL.getInstance().getConnection();
             Statement stm = con.createStatement();
             ResultSet rs = stm.executeQuery(sql);
-            
             QuestionarioDomain questionario;
             List<QuestionarioDomain> lista_questionario = new ArrayList();
             while(rs.next()){

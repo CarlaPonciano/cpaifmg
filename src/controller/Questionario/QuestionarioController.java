@@ -65,43 +65,32 @@ public class QuestionarioController {
         FacesContext context = FacesContext.getCurrentInstance();
         if(questionario_dao.cadastrarQuestionario(questionario)){
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Sucesso", "Questionário cadastrado com sucesso!"));
-            
+            FacesContext.getCurrentInstance().getExternalContext().redirect("inicial.xhtml");
         }else{
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"ERRO", "Erro no cadastro do questionário!"));
         }
         recuperarQuestionarios();
-        
-        Timer timer = null;
-        timer = new Timer();
-        TimerTask tarefa = new TimerTask() {
-            public void run() {
-                try {
-                    FacesContext.getCurrentInstance().getExternalContext().redirect("inicial.xhtml");
-                } catch (IOException ex) {
-                    Logger.getLogger(QuestionarioController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        };
-        timer.schedule(tarefa, 100);
     }
     
-    public void excluirQuestionario(int id){
+    public void excluirQuestionario(int id) throws IOException{
         QuestionarioDAO questionario_dao = new QuestionarioDAO();
         FacesContext context = FacesContext.getCurrentInstance();
         if(questionario_dao.excluirQuestionario(id)){
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Sucesso", "Questionário excluído com sucesso!"));
+            FacesContext.getCurrentInstance().getExternalContext().redirect("inicial.xhtml");
         }else{
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"ERRO", "Erro na exclusão do questionário!"));
         }
         recuperarQuestionarios();
     }
     
-    public void atualizarQuestionario(){
+    public void atualizarQuestionario() throws IOException{
         questionario.setId(id_questionario_editar);
         QuestionarioDAO questionario_dao = new QuestionarioDAO();
         FacesContext context = FacesContext.getCurrentInstance();
         if(questionario_dao.atualizarQuestionario(questionario)){
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Sucesso", "Questionário atualizado com sucesso!"));
+            FacesContext.getCurrentInstance().getExternalContext().redirect("inicial.xhtml");
         }else{
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"ERRO", "Erro na atualização do questionário!"));
         }
