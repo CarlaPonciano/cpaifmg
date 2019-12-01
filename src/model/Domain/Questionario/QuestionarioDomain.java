@@ -20,16 +20,29 @@ public class QuestionarioDomain {
     private int id_tipo_questionario;
     private String tipo_questionario;
     private List<RespostaQuestionario> resposta_questionario;
+    private int status_id;
+    private String status;
 
     public QuestionarioDomain() {}
 
-    public QuestionarioDomain(int id, String nome, String descricao, String criador, int id_tipo_questionario, List<RespostaQuestionario> resposta_questionario) {
+    public QuestionarioDomain(int id, String nome, String descricao, String criador, int id_tipo_questionario, String tipo_questionario, List<RespostaQuestionario> resposta_questionario, int status_id, String status) {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
         this.criador = criador;
         this.id_tipo_questionario = id_tipo_questionario;
+        this.tipo_questionario = tipo_questionario;
         this.resposta_questionario = resposta_questionario;
+        this.status_id = status_id;
+        this.status = status;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public int getId() {
@@ -86,6 +99,14 @@ public class QuestionarioDomain {
 
     public void setResposta_questionario(List<RespostaQuestionario> resposta_questionario) {
         this.resposta_questionario = resposta_questionario;
+    }
+
+    public int getStatus_id() {
+        return status_id;
+    }
+
+    public void setStatus_id(int status_id) {
+        this.status_id = status_id;
     }
     
 }

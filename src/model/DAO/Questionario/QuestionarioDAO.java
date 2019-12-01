@@ -13,6 +13,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import model.Connection.ConnectionPostgreSQL;
+import model.Domain.Questionario.StatusQuestionarioEnum;
 
 /**
  *
@@ -37,9 +38,9 @@ public class QuestionarioDAO {
     }
     
     public boolean atualizarQuestionario(QuestionarioDomain questionario){
-        String sql = "UPDATE questionario SET (nome, descricao, Usuario_usuario, TipoQuestionario_id) =  "
+        String sql = "UPDATE questionario SET (nome, descricao, Usuario_usuario, TipoQuestionario_id, status_id) =  "
                         + "('" + questionario.getNome() + "', '" + questionario.getDescricao() + "', '"
-                        + questionario.getCriador() + "', " + questionario.getId_tipo_questionario() + ") WHERE id = " + questionario.getId() + ";";
+                        + questionario.getCriador() + "', " + questionario.getId_tipo_questionario() + ", " + questionario.getStatus_id() + ") WHERE id = " + questionario.getId() + ";";
         try{
             Connection con = ConnectionPostgreSQL.getInstance().getConnection();
             Statement stm = con.createStatement();
@@ -69,7 +70,7 @@ public class QuestionarioDAO {
     }
     
     public List<QuestionarioDomain> recuperarQuestionarios(){
-        String sql = "SELECT * FROM questionario_tipoquestionario;";
+        String sql = "SELECT * FROM questionario_tipoquestionario_status;";
         try{
             Connection con = ConnectionPostgreSQL.getInstance().getConnection();
             Statement stm = con.createStatement();
@@ -83,6 +84,7 @@ public class QuestionarioDAO {
                 questionario.setDescricao(rs.getString("descricao"));
                 questionario.setCriador(rs.getString("usuario_usuario"));
                 questionario.setTipo_questionario(rs.getString("tipo_questionario"));
+                questionario.setStatus(rs.getString("status"));
                 lista_questionario.add(questionario);
             }
             return lista_questionario;
