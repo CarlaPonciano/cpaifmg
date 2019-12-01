@@ -30,15 +30,10 @@ public class TipoQuestionarioController {
     private TipoQuestionarioDomain tipo_questionario = new TipoQuestionarioDomain();
     
     public TipoQuestionarioController() {
-        try {
-            recuperarTipoQuestionario();
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-            Logger.getLogger(TipoQuestionarioController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        recuperarTipoQuestionario();
     }
     
-    public List<TipoQuestionarioDomain> recuperarTipoQuestionario() throws SQLException{
+    public List<TipoQuestionarioDomain> recuperarTipoQuestionario(){
         TipoQuestionarioDAO tipo_questionario_dao = new TipoQuestionarioDAO();
         setLista_tipo_questionario(tipo_questionario_dao.recuperarTipoQuestionario());
         return lista_tipo_questionario;
@@ -69,5 +64,6 @@ public class TipoQuestionarioController {
         }else{
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"ERRO", "Erro no cadastro do tipo do questionário!"));
         }
+        recuperarTipoQuestionario();
     }
 }

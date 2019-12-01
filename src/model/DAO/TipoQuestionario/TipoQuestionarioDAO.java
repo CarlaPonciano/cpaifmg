@@ -39,7 +39,7 @@ public class TipoQuestionarioDAO {
     }
     
     public List<TipoQuestionarioDomain> recuperarTipoQuestionario(){
-        String sql = "SELECT * FROM tipoQuestionario;";
+        String sql = "SELECT * FROM tipoquestionario_tipopergunta_tiporesposta;";
         try{
             Connection con = ConnectionPostgreSQL.getInstance().getConnection();
             Statement stm = con.createStatement();
@@ -52,8 +52,8 @@ public class TipoQuestionarioDAO {
                 tipo_questionario.setId(rs.getInt("id"));
                 tipo_questionario.setNome(rs.getString("nome"));
                 tipo_questionario.setDescricao(rs.getString("descricao"));
-                tipo_questionario.setTipo_pergunta(new TipoPerguntaDomain(rs.getInt("TipoPergunta_id")));
-                System.out.println(tipo_questionario);
+                tipo_questionario.setTipo_pergunta(rs.getString("tipo_pergunta"));
+                tipo_questionario.setTipo_resposta(rs.getString("tipo_resposta"));
                 lista_tipo_questionario.add(tipo_questionario);
             }
             return lista_tipo_questionario;
