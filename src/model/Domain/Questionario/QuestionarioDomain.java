@@ -6,7 +6,8 @@
 package model.Domain.Questionario;
 
 import java.util.List;
-import model.Domain.RespostaQuestionario.RespostaQuestionario;
+import model.Domain.RespostaQuestionario.RespostaQuestionarioDomain;
+import model.Domain.TipoPergunta.TipoPerguntaDomain;
 
 /**
  *
@@ -19,13 +20,14 @@ public class QuestionarioDomain {
     private String criador;
     private int id_tipo_questionario;
     private String tipo_questionario;
-    private List<RespostaQuestionario> resposta_questionario;
+    private List<RespostaQuestionarioDomain> resposta_questionario;
     private int status_id;
     private String status;
+    private TipoPerguntaDomain tipo_pergunta;
 
     public QuestionarioDomain() {}
 
-    public QuestionarioDomain(int id, String nome, String descricao, String criador, int id_tipo_questionario, String tipo_questionario, List<RespostaQuestionario> resposta_questionario, int status_id, String status) {
+    public QuestionarioDomain(int id, String nome, String descricao, String criador, int id_tipo_questionario, String tipo_questionario, List<RespostaQuestionarioDomain> resposta_questionario, int status_id, String status, TipoPerguntaDomain tipo_pergunta) {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
@@ -35,6 +37,15 @@ public class QuestionarioDomain {
         this.resposta_questionario = resposta_questionario;
         this.status_id = status_id;
         this.status = status;
+        this.tipo_pergunta = tipo_pergunta;
+    }
+
+    public TipoPerguntaDomain getTipo_pergunta() {
+        return tipo_pergunta;
+    }
+
+    public void setTipo_pergunta(TipoPerguntaDomain tipo_pergunta) {
+        this.tipo_pergunta = tipo_pergunta;
     }
 
     public String getStatus() {
@@ -93,11 +104,11 @@ public class QuestionarioDomain {
         this.id_tipo_questionario = id_tipo_questionario;
     }
     
-    public List<RespostaQuestionario> getResposta_questionario() {
+    public List<RespostaQuestionarioDomain> getResposta_questionario() {
         return resposta_questionario;
     }
 
-    public void setResposta_questionario(List<RespostaQuestionario> resposta_questionario) {
+    public void setResposta_questionario(List<RespostaQuestionarioDomain> resposta_questionario) {
         this.resposta_questionario = resposta_questionario;
     }
 

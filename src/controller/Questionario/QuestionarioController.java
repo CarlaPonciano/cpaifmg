@@ -25,11 +25,13 @@ import model.Domain.Questionario.QuestionarioDomain;
 public class QuestionarioController {
     private QuestionarioDomain questionario;
     private static List<QuestionarioDomain> lista_questionario = new ArrayList();
+    private static List<QuestionarioDomain> lista_questionario_ativo = new ArrayList();
     private int id_questionario_editar;
 
     public QuestionarioController() {
         questionario = new QuestionarioDomain();
         recuperarQuestionarios();
+        recuperarQuestionariosAtivos();
     }
     
     public void setQuestionario(QuestionarioDomain questionario) {
@@ -54,6 +56,14 @@ public class QuestionarioController {
 
     public void setId_questionario_editar(int id_questionario_editar) {
         this.id_questionario_editar = id_questionario_editar;
+    }
+
+    public static List<QuestionarioDomain> getLista_questionario_ativo() {
+        return lista_questionario_ativo;
+    }
+
+    public static void setLista_questionario_ativo(List<QuestionarioDomain> lista_questionario_ativo) {
+        QuestionarioController.lista_questionario_ativo = lista_questionario_ativo;
     }
     
     public void cadastrarQuestionario() throws IOException, InterruptedException{
@@ -97,5 +107,11 @@ public class QuestionarioController {
         QuestionarioDAO questionario_dao = new QuestionarioDAO();
         setLista_questionario(questionario_dao.recuperarQuestionarios());
         return lista_questionario;
+    }
+    
+    public static List<QuestionarioDomain> recuperarQuestionariosAtivos(){
+        QuestionarioDAO questionario_dao = new QuestionarioDAO();
+        setLista_questionario_ativo(questionario_dao.recuperarQuestionariosAtivos());
+        return lista_questionario_ativo;
     }
 }

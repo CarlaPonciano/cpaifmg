@@ -20,9 +20,9 @@ import model.Connection.ConnectionPostgreSQL;
  */
 public class QuestionarioDAO {
     public boolean cadastrarQuestionario(QuestionarioDomain questionario){
-        String sql = "INSERT INTO questionario(nome, descricao, Usuario_usuario, TipoQuestionario_id) VALUES "
+        String sql = "INSERT INTO questionario(nome, descricao, Usuario_usuario, TipoQuestionario_id, status_id) VALUES "
                         + "('" + questionario.getNome() + "', '" + questionario.getDescricao() + "', '"
-                        + questionario.getCriador() + "', " + questionario.getId_tipo_questionario() + ");";
+                        + questionario.getCriador() + "', " + questionario.getId_tipo_questionario() + ", 1);";
         try{
             Connection con = ConnectionPostgreSQL.getInstance().getConnection();
             Statement stm = con.createStatement();
@@ -93,4 +93,32 @@ public class QuestionarioDAO {
             return null;
         }
     }
+    
+    public List<QuestionarioDomain> recuperarQuestionariosAtivos(){
+        String sql = "SELECT * FROM questionario_tipoquestionario_status WHERE status = 'Ativo';";
+        try{
+            Connection con = ConnectionPostgreSQL.getInstance().getConnection();
+            Statement stm = con.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            QuestionarioDomain questionario;
+            List<QuestionarioDomain> lista_questionario = new ArrayList();
+            while(rs.next()){
+                questionario = new QuestionarioDomain();
+                questionario.setId(rs.getInt("id"));
+                questionario.setNome(rs.getString("nome"));
+                questionario.setDescricao(rs.getString("descricao"));
+                questionario.setCriador(rs.getString("usuario_usuario"));
+                questionario.setTipo_questionario(rs.getString("tipo_questionario"));
+                questionario.setStatus(rs.getString("status"));
+                lista_questionario.add(questionario);
+            }
+            return lista_questionario;
+        }catch(SQLException e){
+            System.out.println("Erro na recuperação dos questionários ativos!");
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
+    
+    
 }

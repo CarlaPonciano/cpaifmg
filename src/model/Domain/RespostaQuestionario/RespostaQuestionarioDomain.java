@@ -11,7 +11,7 @@ import java.util.List;
  *
  * @author carli
  */
-public class RespostaQuestionario {
+public class RespostaQuestionarioDomain {
     private int id;
     private String semestre_marcado;
     private int id_opcao_disciplina;
@@ -21,9 +21,9 @@ public class RespostaQuestionario {
     private String observacoes;
     private List<RespostaMarcada> resposta_marcada;
 
-    public RespostaQuestionario() {}
+    public RespostaQuestionarioDomain() {}
 
-    public RespostaQuestionario(int id, String semestre_marcado, int id_opcao_disciplina, int id_opcao_curso, int id_opcao_campus, String nome, String observacoes, List<RespostaMarcada> resposta_marcada) {
+    public RespostaQuestionarioDomain(int id, String semestre_marcado, int id_opcao_disciplina, int id_opcao_curso, int id_opcao_campus, String nome, String observacoes, List<RespostaMarcada> resposta_marcada) {
         this.id = id;
         this.semestre_marcado = semestre_marcado;
         this.id_opcao_disciplina = id_opcao_disciplina;

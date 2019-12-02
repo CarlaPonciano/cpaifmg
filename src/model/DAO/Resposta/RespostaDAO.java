@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model.DAO.Pergunta;
+package model.DAO.Resposta;
 
 import model.Domain.Pergunta.PerguntaDomain;
 import java.sql.Connection;
@@ -13,29 +13,15 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import model.Connection.ConnectionPostgreSQL;
+import model.Domain.Resposta.RespostaDomain;
 import model.Domain.TipoPergunta.TipoPerguntaDomain;
 
 /**
  *
  * @author amanda
  */
-public class PerguntaDAO {
-    public boolean cadastrarPergunta(PerguntaDomain pergunta){
-        String sql = "INSERT INTO pergunta (pergunta, tipopergunta_id) VALUES "
-                        + "('" + pergunta.getPergunta() + "', " + pergunta.getTipoPergunta().getId() + ");";
-        try{
-            Connection con = ConnectionPostgreSQL.getInstance().getConnection();
-            Statement stm = con.createStatement();
-            stm.executeUpdate(sql);
-            return true;
-        }catch(SQLException e){
-            System.out.println("Erro no cadastro da questÃ£o!");
-            System.out.println(e.getMessage());
-            return false;
-        }
-    }
-    
-    public List<PerguntaDomain> recuperarPerguntas(){
+public class RespostaDAO {
+    public List<PerguntaDomain> recuperarRespostas(){
         String sql = "SELECT P.id AS P_id, P.pergunta, TP.id AS TP_id, TP.tipo FROM pergunta AS P, tipopergunta AS TP"
                     + " WHERE P.tipoPergunta_id = TP.id;";
         try{
@@ -66,26 +52,25 @@ public class PerguntaDAO {
         }
     }
     
-    public List<PerguntaDomain> recuperarPerguntasQuestionario(int tipo_questionario_id){
-        String sql = "select distinct pergunta_id, pergunta from tipoquestionario_tipopergunta_tiporesposta_pergunta_resposta "
+    public List<RespostaDomain> recuperarRespostasQuestionario(int tipo_questionario_id){
+        String sql = "select distinct resposta_id, resposta from tipoquestionario_tipopergunta_tiporesposta_pergunta_resposta "
                 + "where tipo_questionario_id = " + tipo_questionario_id + ";";
         try{
             Connection con = ConnectionPostgreSQL.getInstance().getConnection();
             Statement stm = con.createStatement();
             ResultSet rs = stm.executeQuery(sql);
             
-            PerguntaDomain pergunta;
-            TipoPerguntaDomain tipo_pergunta;
-            List<PerguntaDomain> lista_pergunta = new ArrayList();
+            RespostaDomain resposta;
+            List<RespostaDomain> lista_resposta = new ArrayList();
             while(rs.next()){
-                pergunta = new PerguntaDomain();
-                pergunta.setId(rs.getInt("pergunta_id"));
-                pergunta.setPergunta(rs.getString("pergunta"));
-                lista_pergunta.add(pergunta);
+                resposta = new RespostaDomain();
+                resposta.setId(rs.getInt("resposta_id"));
+                resposta.setResposta(rs.getString("resposta"));
+                lista_resposta.add(resposta);
             }
-            return lista_pergunta;
+            return lista_resposta;
         }catch(SQLException e){
-            System.out.println("Erro na recuperação das perguntas do questionário!");
+            System.out.println("Erro na recuperação das respostas do questionário!");
             System.out.println(e.getMessage());
             return null;
         }

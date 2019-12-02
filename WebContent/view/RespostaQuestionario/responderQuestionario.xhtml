@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" 	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Responder Questionário | Sistema CPA</title>
+</h:head>
+<h:body>
+<p:growl id="growl1" showDetail="true"  keepAlive="1000"  /> 
+	---Responder Questionário---<br/><br/>
+        <h:form>
+            Selecione o questionário:
+            <h:selectOneMenu value="#{questionarioController.questionario.id_tipo_questionario}">
+                <f:selectItems value="#{questionarioController.lista_questionario}" var="ATUAL" itemValue="#{ATUAL.id}" itemLabel="#{ATUAL.nome}">
+                </f:selectItems>
+            </h:selectOneMenu><br/><br/>
+            
+            <h:outputLabel>Informe o semestre: </h:outputLabel>  <h:inputText value="#{respostaQuestionarioController.resposta_questionario.semestre_marcado}"/> <br/><br/>
+            
+            Selecione a disciplina: 
+            <h:selectOneMenu value="#{respostaQuestionarioController.resposta_questionario.id_opcao_disciplina}">
+                <f:selectItems value="#{disciplinaController.lista_disciplina}" var="ATUAL" itemValue="#{ATUAL.id}" itemLabel="#{ATUAL.disciplina}">
+                </f:selectItems>
+            </h:selectOneMenu> <br/><br/>
+            
+            Selecione o curso: 
+            <h:selectOneMenu value="#{respostaQuestionarioController.resposta_questionario.id_opcao_curso}">
+                <f:selectItems value="#{cursoController.lista_curso}" var="ATUAL" itemValue="#{ATUAL.id}" itemLabel="#{ATUAL.curso}">
+                </f:selectItems>
+            </h:selectOneMenu> <br/><br/>
+            
+            Selecione o campus 
+            <h:selectOneMenu value="#{respostaQuestionarioController.resposta_questionario.id_opcao_campus}">
+                <f:selectItems value="#{campusController.listaCampus}" var="ATUAL" itemValue="#{ATUAL.id}" itemLabel="#{ATUAL.campus}">
+                </f:selectItems>
+            </h:selectOneMenu><br/><br/>
+            <h:outputLabel>Informe o nome se desejar: </h:outputLabel>  <h:inputText value="#{respostaQuestionarioController.resposta_questionario.nome}"/> <br/><br/>
+            
+            Responda as perguntas:<br/><br/>
+            <p:dataTable var="ATUAL" value="#{respostaQuestionarioController.lista_pergunta}">
+                <p:column headerText="Pergunta">
+                    <h:outputText value="#{ATUAL.pergunta}" />
+                </p:column>
+                <p:column headerText="Resposta">
+                    <h:selectOneMenu value="#{respostaQuestionarioController.resposta_questionario.resposta_marcada}">
+                        <f:selectItems value="#{respostaQuestionarioController.lista_resposta}" var="ATUAL" itemValue="#{ATUAL.id}" itemLabel="#{ATUAL.resposta}">
+                        </f:selectItems>
+                    </h:selectOneMenu><br/><br/>
+                </p:column>
+            </p:dataTable> <br/>
+            
+            <h:outputLabel>Observações: </h:outputLabel>  <h:inputText value="#{respostaQuestionarioController.resposta_questionario.observacoes}"/> <br/><br/>
+            <h:commandButton value="Responder Questionário" action="#{respostaQuestionarioController.cadastrarResposta()}"></h:commandButton> <br/><br/> <br/><br/>
+        </h:form>
+</h:body>
+</html>

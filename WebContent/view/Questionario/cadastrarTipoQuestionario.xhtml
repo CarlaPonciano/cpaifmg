@@ -10,14 +10,13 @@
 </h:head>
 <h:body>
 <p:growl id="growl1" showDetail="true"  keepAlive="1000"  /> 
-	---Cadastrar Tipo Questionário---<br/>
+	---Cadastrar Tipo Questionário---<br/><br/>
         <h:form>
-            Selecione o tipo da pergunta: <br/><br/>
+            Selecione o tipo da pergunta:
             <h:selectOneMenu value="#{tipoQuestionarioController.tipo_questionario.tipo_pergunta_id}">
                 <f:selectItems value="#{tipoPerguntaController.lista_tipo_pergunta}" var="ATUAL" itemValue="#{ATUAL.id}" itemLabel="#{ATUAL.tipo}">
                 </f:selectItems>
-            </h:selectOneMenu>
-            <br/><br/>
+            </h:selectOneMenu> <br/><br/>
             <h:outputLabel>Informe o nome do tipo do questionário: </h:outputLabel>  <h:inputText value="#{tipoQuestionarioController.tipo_questionario.nome}"/> <br/><br/>
             <h:outputLabel>Informe a descrição do tipo do questionário: </h:outputLabel>  <h:inputText value="#{tipoQuestionarioController.tipo_questionario.descricao}"/> <br/><br/>
             <h:commandButton value="Cadastrar Questionário" action="#{tipoQuestionarioController.atualizarTipoQuestionario()}"></h:commandButton> <br/><br/> <br/><br/>
