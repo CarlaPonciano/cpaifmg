@@ -39,12 +39,9 @@
             </h:selectOneMenu><br/><br/>
             <h:outputLabel>Informe o nome se desejar: </h:outputLabel>  <h:inputText value="#{respostaQuestionarioController.resposta_questionario.nome}"/> <br/><br/>
             
-            Responda as perguntas:<br/><br/>
             <p:dataTable var="ATUAL" value="#{respostaQuestionarioController.lista_pergunta}">
-                <p:column headerText="Pergunta">
-                    <h:outputText value="#{ATUAL.pergunta}" />
-                </p:column>
-                <p:column headerText="Resposta">
+                <p:column headerText="Responda as perguntas:">
+                    <h:outputText value="#{ATUAL.pergunta}" /><br/><br/>
                     <h:selectOneMenu value="#{respostaQuestionarioController.resposta_questionario.resposta_marcada}">
                         <f:selectItems value="#{respostaQuestionarioController.lista_resposta}" var="ATUAL" itemValue="#{ATUAL.id}" itemLabel="#{ATUAL.resposta}">
                         </f:selectItems>
