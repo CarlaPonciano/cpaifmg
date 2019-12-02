@@ -35,6 +35,21 @@ public class DisciplinaDAO {
         }
     }
     
+    public boolean excluirDisciplina(int id){
+        String sql = "DELETE FROM disciplina WHERE id = " + id + ";";
+        try{
+            Connection con = ConnectionPostgreSQL.getInstance().getConnection();
+            Statement stm = con.createStatement();
+            stm.executeUpdate(sql);
+            return true;
+        }catch(SQLException e){
+            System.out.println("Erro na exclusão da disciplina!");
+            System.out.println(sql);
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+    
     public List<DisciplinaDomain> recuperarDisciplina(){
         String sql = "SELECT * FROM disciplina_curso;";
         try{

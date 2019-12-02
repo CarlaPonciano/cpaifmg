@@ -35,6 +35,21 @@ public class CursoDAO {
         }
     }
     
+    public boolean excluirCurso(int id){
+        String sql = "DELETE FROM curso WHERE id = " + id + ";";
+        try{
+            Connection con = ConnectionPostgreSQL.getInstance().getConnection();
+            Statement stm = con.createStatement();
+            stm.executeUpdate(sql);
+            return true;
+        }catch(SQLException e){
+            System.out.println("Erro na exclusão do curso!");
+            System.out.println(sql);
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+    
     public List<CursoDomain> recuperarCurso(){
         String sql = "SELECT * FROM curso_campus;";
         try{

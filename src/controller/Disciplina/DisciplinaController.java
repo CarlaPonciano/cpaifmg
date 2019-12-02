@@ -5,6 +5,7 @@
  */
 package controller.Disciplina;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.application.FacesMessage;
@@ -53,6 +54,18 @@ public class DisciplinaController {
         }else{
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"ERRO", "Erro no cadastro da disciplina!"));
         }
+    }
+    
+    public void excluirDisciplina(int id) throws IOException{
+        DisciplinaDAO disciplina_dao = new DisciplinaDAO();
+        FacesContext context = FacesContext.getCurrentInstance();
+        if(disciplina_dao.excluirDisciplina(id)){
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Sucesso", "Disciplina excluída com sucesso!"));
+            FacesContext.getCurrentInstance().getExternalContext().redirect("campusCursoDisciplina.xhtml");
+        }else{
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"ERRO", "Erro na exclusão da disciplina!"));
+        }
+        recuperarDisciplinas();
     }
     
     public List<DisciplinaDomain> recuperarDisciplinas(){

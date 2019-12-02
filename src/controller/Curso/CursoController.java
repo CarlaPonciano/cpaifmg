@@ -5,6 +5,7 @@
  */
 package controller.Curso;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,6 +55,18 @@ public class CursoController {
         }else{
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"ERRO", "Erro no cadastro do curso!"));
         }
+    }
+    
+    public void excluirCurso(int id) throws IOException{
+        CursoDAO curso_dao = new CursoDAO();
+        FacesContext context = FacesContext.getCurrentInstance();
+        if(curso_dao.excluirCurso(id)){
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Sucesso", "Curso excluído com sucesso!"));
+            FacesContext.getCurrentInstance().getExternalContext().redirect("campusCursoDisciplina.xhtml");
+        }else{
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"ERRO", "Erro na exclusão do curso!"));
+        }
+        recuperarCurso();
     }
     
     public List<CursoDomain> recuperarCurso(){

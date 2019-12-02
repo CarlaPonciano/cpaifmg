@@ -34,6 +34,21 @@ public class CampusDAO {
         }
     }
     
+    public boolean excluirCampus(int id){
+        String sql = "DELETE FROM campus WHERE id = " + id + ";";
+        try{
+            Connection con = ConnectionPostgreSQL.getInstance().getConnection();
+            Statement stm = con.createStatement();
+            stm.executeUpdate(sql);
+            return true;
+        }catch(SQLException e){
+            System.out.println("Erro na exclusão do campus!");
+            System.out.println(sql);
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+    
     public List<CampusDomain> recuperarCampus(){
         String sql = "SELECT * FROM campus;";
         try{
