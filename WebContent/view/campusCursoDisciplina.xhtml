@@ -10,11 +10,64 @@
 </h:head>
 <h:body>
 <p:growl id="growl1" showDetail="true"  keepAlive="1000"  /> 
-	---Sistema CPA--- <br/>
+	---Sistema CPA--- <br/><br/>
         <h:form>
+            ---Campus--- <br/><br/>
             <h:commandButton value="Cadastrar Campus" action="Campus/cadastrarCampus.xhtml"></h:commandButton> <br/><br/>
+            <p:dataTable var="ATUAL" value="#{campusController.listaCampus}">
+                <p:column headerText="Id">
+                    <h:outputText value="#{ATUAL.id}"  />
+                </p:column>
+                
+                <p:column headerText="Campus">
+                    <h:outputText value="#{ATUAL.campus}" />
+                </p:column>
+                
+                <p:column headerText="Ações">
+                    <h:commandButton value="Editar" onclick="#{questionarioController.setId_questionario_editar(ATUAL.id)}" action="editarQuestionario.xhtml"></h:commandButton> .
+                    <h:commandButton value="Excluir" action="#{questionarioController.excluirQuestionario(ATUAL.id)}"></h:commandButton>
+                </p:column>
+            </p:dataTable> <br/>
+            ---Curso--- <br/><br/>
             <h:commandButton value="Cadastrar Cursos" action="Curso/cadastrarCurso.xhtml"></h:commandButton> <br/><br/>
+            <p:dataTable var="ATUAL" value="#{cursoController.lista_curso}">
+                <p:column headerText="Id">
+                    <h:outputText value="#{ATUAL.id}"  />
+                </p:column>
+                
+                <p:column headerText="Curso">
+                    <h:outputText value="#{ATUAL.curso}" />
+                </p:column>
+                
+                <p:column headerText="Campus">
+                    <h:outputText value="#{ATUAL.campus}" />
+                </p:column>
+                
+                <p:column headerText="Ações">
+                    <h:commandButton value="Editar" onclick="#{questionarioController.setId_questionario_editar(ATUAL.id)}" action="editarQuestionario.xhtml"></h:commandButton> .
+                    <h:commandButton value="Excluir" action="#{questionarioController.excluirQuestionario(ATUAL.id)}"></h:commandButton>
+                </p:column>
+            </p:dataTable> <br/>
+            ---Disciplina--- <br/><br/>
             <h:commandButton value="Cadastrar Disciplinas" action="Disciplina/cadastrarDisciplina.xhtml"></h:commandButton> <br/><br/>
+            <p:dataTable var="ATUAL" value="#{disciplinaController.lista_disciplina}">
+                <p:column headerText="Id">
+                    <h:outputText value="#{ATUAL.id}"  />
+                </p:column>
+                
+                <p:column headerText="Disciplina">
+                    <h:outputText value="#{ATUAL.disciplina}" />
+                </p:column>
+                
+                <p:column headerText="Curso">
+                    <h:outputText value="#{ATUAL.curso}" />
+                </p:column>
+                
+                <p:column headerText="Ações">
+                    <h:commandButton value="Editar" onclick="#{questionarioController.setId_questionario_editar(ATUAL.id)}" action="editarQuestionario.xhtml"></h:commandButton> .
+                    <h:commandButton value="Excluir" action="#{questionarioController.excluirQuestionario(ATUAL.id)}"></h:commandButton>
+                </p:column>
+            </p:dataTable> <br/>
         </h:form>
 </h:body>
 </html>

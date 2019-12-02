@@ -12,7 +12,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import model.Connection.ConnectionPostgreSQL;
-import model.Domain.TipoPergunta.TipoPerguntaDomain;
 import model.Domain.TipoQuestionario.TipoQuestionarioDomain;
 
 /**

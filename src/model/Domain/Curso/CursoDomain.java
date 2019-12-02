@@ -13,13 +13,23 @@ public class CursoDomain {
     private int id;
     private String curso;
     private int campus_id;
+    private String campus;
 
     public CursoDomain() {}
 
-    public CursoDomain(int id, String curso, int campus_id) {
+    public CursoDomain(int id, String curso, int campus_id, String campus) {
         this.id = id;
         this.curso = curso;
         this.campus_id = campus_id;
+        this.campus = campus;
+    }
+
+    public String getCampus() {
+        return campus;
+    }
+
+    public void setCampus(String campus) {
+        this.campus = campus;
     }
 
     public int getId() {

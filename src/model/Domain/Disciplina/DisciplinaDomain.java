@@ -14,14 +14,24 @@ public class DisciplinaDomain {
     private String disciplina;
     private int curso_id;
     private int periodo;
+    private String curso;
 
     public DisciplinaDomain() {}
 
-    public DisciplinaDomain(int id, String disciplina, int curso_id, int periodo) {
+    public DisciplinaDomain(int id, String disciplina, int curso_id, int periodo, String curso) {
         this.id = id;
         this.disciplina = disciplina;
         this.curso_id = curso_id;
         this.periodo = periodo;
+        this.curso = curso;
+    }
+
+    public String getCurso() {
+        return curso;
+    }
+
+    public void setCurso(String curso) {
+        this.curso = curso;
     }
 
     public int getId() {
@@ -55,5 +65,7 @@ public class DisciplinaDomain {
     public void setPeriodo(int periodo) {
         this.periodo = periodo;
     }
+    
+    
     
 }

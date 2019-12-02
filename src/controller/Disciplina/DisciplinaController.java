@@ -5,6 +5,8 @@
  */
 package controller.Disciplina;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -21,8 +23,10 @@ import model.Domain.Disciplina.DisciplinaDomain;
 @SessionScoped
 public class DisciplinaController {
     DisciplinaDomain disciplina = new DisciplinaDomain();
+    private List<DisciplinaDomain> lista_disciplina = new ArrayList();
     
     public DisciplinaController() {
+        recuperarDisciplinas();
     }
 
     public DisciplinaDomain getDisciplina() {
@@ -31,6 +35,14 @@ public class DisciplinaController {
 
     public void setDisciplina(DisciplinaDomain disciplina) {
         this.disciplina = disciplina;
+    }
+
+    public List<DisciplinaDomain> getLista_disciplina() {
+        return lista_disciplina;
+    }
+
+    public void setLista_disciplina(List<DisciplinaDomain> lista_disciplina) {
+        this.lista_disciplina = lista_disciplina;
     }
     
     public void cadastrarDisciplina(){
@@ -41,5 +53,11 @@ public class DisciplinaController {
         }else{
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"ERRO", "Erro no cadastro da disciplina!"));
         }
+    }
+    
+    public List<DisciplinaDomain> recuperarDisciplinas(){
+        DisciplinaDAO disciplina_dao = new DisciplinaDAO();
+        setLista_disciplina(disciplina_dao.recuperarDisciplina());
+        return lista_disciplina;
     }
 }

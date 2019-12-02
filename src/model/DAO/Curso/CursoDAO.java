@@ -36,7 +36,7 @@ public class CursoDAO {
     }
     
     public List<CursoDomain> recuperarCurso(){
-        String sql = "SELECT * FROM curso;";
+        String sql = "SELECT * FROM curso_campus;";
         try{
             Connection con = ConnectionPostgreSQL.getInstance().getConnection();
             Statement stm = con.createStatement();
@@ -48,7 +48,7 @@ public class CursoDAO {
                     curso = new CursoDomain();
                     curso.setId(rs.getInt("id"));
                     curso.setCurso(rs.getString("curso"));
-                    curso.setCampus_id(rs.getInt("campus_id"));
+                    curso.setCampus(rs.getString("campus"));
                     lista_curso.add(curso);
             }
             return lista_curso;

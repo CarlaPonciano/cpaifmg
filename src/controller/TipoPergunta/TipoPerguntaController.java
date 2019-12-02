@@ -5,8 +5,6 @@
  */
 package controller.TipoPergunta;
 
-import java.io.Serializable;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import model.DAO.TipoPergunta.TipoPerguntaDAO;

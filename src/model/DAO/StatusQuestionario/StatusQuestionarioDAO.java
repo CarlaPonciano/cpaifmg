@@ -5,7 +5,6 @@
  */
 package model.DAO.StatusQuestionario;
 
-import model.Domain.Questionario.QuestionarioDomain;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
