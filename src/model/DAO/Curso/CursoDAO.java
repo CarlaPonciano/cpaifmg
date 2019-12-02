@@ -35,6 +35,23 @@ public class CursoDAO {
         }
     }
     
+    public boolean atualizarCurso(CursoDomain curso){
+        String sql = "UPDATE curso SET (curso, campus_id) =  "
+                        + "('" + curso.getCurso()+ "', " + curso.getCampus_id() + ") WHERE id = " + curso.getId() + ";";
+        System.out.println(sql);
+        try{
+            Connection con = ConnectionPostgreSQL.getInstance().getConnection();
+            Statement stm = con.createStatement();
+            stm.executeUpdate(sql);
+            return true;
+        }catch(SQLException e){
+            System.out.println("Erro na atualização do curso!");
+            System.out.println(sql);
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+    
     public boolean excluirCurso(int id){
         String sql = "DELETE FROM curso WHERE id = " + id + ";";
         try{

@@ -25,6 +25,7 @@ import model.Domain.Disciplina.DisciplinaDomain;
 public class DisciplinaController {
     DisciplinaDomain disciplina = new DisciplinaDomain();
     private List<DisciplinaDomain> lista_disciplina = new ArrayList();
+    private int id_disciplina_editar;
     
     public DisciplinaController() {
         recuperarDisciplinas();
@@ -45,6 +46,14 @@ public class DisciplinaController {
     public void setLista_disciplina(List<DisciplinaDomain> lista_disciplina) {
         this.lista_disciplina = lista_disciplina;
     }
+
+    public int getId_Disciplina_editar() {
+        return id_disciplina_editar;
+    }
+
+    public void setId_Disciplina_editar(int id_disciplina_editar) {
+        this.id_disciplina_editar = id_disciplina_editar;
+    }
     
     public void cadastrarDisciplina(){
         DisciplinaDAO disciplina_dao = new DisciplinaDAO();
@@ -54,6 +63,19 @@ public class DisciplinaController {
         }else{
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"ERRO", "Erro no cadastro da disciplina!"));
         }
+    }
+    
+    public void atualizarDisciplina() throws IOException{
+        disciplina.setId(id_disciplina_editar);
+        DisciplinaDAO disciplina_dao = new DisciplinaDAO();
+        FacesContext context = FacesContext.getCurrentInstance();
+        if(disciplina_dao.atualizarDisciplina(disciplina)){
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Sucesso", "Disciplina atualizada com sucesso!"));
+            FacesContext.getCurrentInstance().getExternalContext().redirect("../campusCursoDisciplina.xhtml");
+        }else{
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"ERRO", "Erro na atualização da disciplina!"));
+        }
+        recuperarDisciplinas();
     }
     
     public void excluirDisciplina(int id) throws IOException{

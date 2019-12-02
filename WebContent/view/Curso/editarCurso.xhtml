@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" 	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Editar Curso | Sistema CPA</title>
+</h:head>
+<h:body>
+<p:growl id="growl1" showDetail="true"  keepAlive="1000"  /> 
+     ---Editar Curso--- <br/>
+     <h:form>
+         Selecione o Campus desejado: <br/><br/>
+         <h:selectOneMenu value="#{cursoController.curso.campus_id}">
+             <f:selectItems value="#{campusController.listaCampus}" var="ATUAL" itemValue="#{ATUAL.id}" itemLabel="#{ATUAL.campus}">
+             </f:selectItems>
+         </h:selectOneMenu>
+         <br/><br/>
+         <h:outputLabel>Informe o nome do curso: </h:outputLabel>  <h:inputText value="#{cursoController.curso.curso}"/> <br/><br/>
+         <h:commandButton value="Atualizar Curso" action="#{cursoController.atualizarCurso()}"></h:commandButton> <br/><br/> <br/><br/>
+     </h:form>
+</h:body>
+</html>

@@ -34,6 +34,22 @@ public class CampusDAO {
         }
     }
     
+    public boolean atualizarCampus(CampusDomain campus){
+        String sql = "UPDATE campus SET (campus) =  "
+                        + "('" + campus.getCampus() + "') WHERE id = " + campus.getId() + ";";
+        try{
+            Connection con = ConnectionPostgreSQL.getInstance().getConnection();
+            Statement stm = con.createStatement();
+            stm.executeUpdate(sql);
+            return true;
+        }catch(SQLException e){
+            System.out.println("Erro na atualização do campus!");
+            System.out.println(sql);
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+    
     public boolean excluirCampus(int id){
         String sql = "DELETE FROM campus WHERE id = " + id + ";";
         try{

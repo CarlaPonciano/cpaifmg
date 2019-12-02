@@ -35,6 +35,24 @@ public class DisciplinaDAO {
         }
     }
     
+    public boolean atualizarDisciplina(DisciplinaDomain disciplina){
+        String sql = "UPDATE disciplina SET (disciplina, periodo, curso_id) =  "
+                        + "('" + disciplina.getDisciplina()+ "', " + disciplina.getPeriodo()+ ", "
+                        + disciplina.getCurso_id()+ ") WHERE id = " + disciplina.getId() + ";";
+        System.out.println(sql);
+        try{
+            Connection con = ConnectionPostgreSQL.getInstance().getConnection();
+            Statement stm = con.createStatement();
+            stm.executeUpdate(sql);
+            return true;
+        }catch(SQLException e){
+            System.out.println("Erro na atualização da disciplina!");
+            System.out.println(sql);
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+    
     public boolean excluirDisciplina(int id){
         String sql = "DELETE FROM disciplina WHERE id = " + id + ";";
         try{

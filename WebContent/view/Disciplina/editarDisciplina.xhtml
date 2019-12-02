@@ -6,11 +6,11 @@
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Cadastrar Disciplina | Sistema CPA</title>
+<title>Editar Disciplina | Sistema CPA</title>
 </h:head>
 <h:body>
 <p:growl id="growl1" showDetail="true"  keepAlive="1000"  /> 
-     ---Cadastrar Disciplina--- <br/><br/>
+     ---Editar Disciplina--- <br/><br/>
      <h:form>
          Selecione o curso desejado: <br/><br/>
          <h:selectOneMenu value="#{disciplinaController.disciplina.curso_id}">
@@ -20,7 +20,7 @@
          <br/><br/>
          <h:outputLabel>Informe o nome da disciplina: </h:outputLabel>  <h:inputText value="#{disciplinaController.disciplina.disciplina}"/> <br/><br/>
          <h:outputLabel>Informe o período da disciplina: </h:outputLabel>  <h:inputText value="#{disciplinaController.disciplina.periodo}"/> <br/><br/>
-         <h:commandButton value="Cadastrar Disciplina" action="#{disciplinaController.cadastrarDisciplina()}"></h:commandButton> <br/><br/> <br/><br/>
+         <h:commandButton value="Atualizar Disciplina" action="#{disciplinaController.atualizarDisciplina()}"></h:commandButton> <br/><br/> <br/><br/>
      </h:form>
 </h:body>
 </html>

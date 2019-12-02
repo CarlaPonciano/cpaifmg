@@ -26,6 +26,7 @@ import javax.faces.context.FacesContext;
 public class CampusController {
     private CampusDomain campus;
     private List<CampusDomain> lista_campus = new ArrayList();
+    private int id_campus_editar;
     
     public CampusController() {
         campus = new CampusDomain();
@@ -47,6 +48,14 @@ public class CampusController {
     public void setListaCampus(List<CampusDomain> lista_campus) {
         this.lista_campus = lista_campus;
     }
+
+    public int getId_campus_editar() {
+        return id_campus_editar;
+    }
+
+    public void setId_campus_editar(int id_campus_editar) {
+        this.id_campus_editar = id_campus_editar;
+    }
     
     public void cadastrarCampus(){
         CampusDAO campus_dao = new CampusDAO();
@@ -56,6 +65,21 @@ public class CampusController {
         }else{
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"ERRO", "Erro no cadastro do campus!"));
         }
+    }
+    
+    public void atualizarCampus() throws IOException{
+        System.out.println("ATUALIZAAAAAAR");
+        campus.setId(id_campus_editar);
+        System.out.println(id_campus_editar);
+        CampusDAO campus_dao = new CampusDAO();
+        FacesContext context = FacesContext.getCurrentInstance();
+        if(campus_dao.atualizarCampus(campus)){
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Sucesso", "Campus atualizado com sucesso!"));
+            FacesContext.getCurrentInstance().getExternalContext().redirect("../campusCursoDisciplina.xhtml");
+        }else{
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"ERRO", "Erro na atualização do campus!"));
+        }
+        recuperarCampus();
     }
     
     public void excluirCampus(int id) throws IOException{

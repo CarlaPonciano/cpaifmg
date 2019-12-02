@@ -6,14 +6,14 @@
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Cadastrar Campus | Sistema CPA</title>
+<title>Editar Campus | Sistema CPA</title>
 </h:head>
 <h:body>
 <p:growl id="growl1" showDetail="true"  keepAlive="1000"  /> 
-    ---Cadastrar Campus--- <br/><br/>
+    ---Editar Campus--- <br/>
     <h:form>
         <h:outputLabel>Informe o nome do campus: </h:outputLabel>  <h:inputText value="#{campusController.campus.campus}"/> <br/><br/>
-        <h:commandButton value="Cadastrar Campus" action="#{campusController.cadastrarCampus()}"></h:commandButton> <br/><br/> <br/><br/>
+        <h:commandButton value="Editar Campus" action="#{campusController.atualizarCampus()}"></h:commandButton> <br/><br/> <br/><br/>
     </h:form>
 </h:body>
 </html>
