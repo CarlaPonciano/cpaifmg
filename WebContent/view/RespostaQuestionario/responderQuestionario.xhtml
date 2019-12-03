@@ -42,10 +42,10 @@
             <p:dataTable var="ATUAL" value="#{respostaQuestionarioController.lista_pergunta}">
                 <p:column headerText="Responda as perguntas:">
                     <h:outputText value="#{ATUAL.pergunta}" /><br/><br/>
-                    <h:selectOneMenu value="#{respostaQuestionarioController.resposta_questionario.resposta_marcada}">
-                        <f:selectItems value="#{respostaQuestionarioController.lista_resposta}" var="ATUAL" itemValue="#{ATUAL.id}" itemLabel="#{ATUAL.resposta}">
+                    <p:selectOneRadio   value="#{respostaQuestionarioController.resposta_questionario.resposta_marcada}">
+                        <f:selectItems  value="#{respostaQuestionarioController.lista_resposta}" var="ATUAL" itemValue="#{ATUAL.id}" itemLabel="#{ATUAL.resposta}">
                         </f:selectItems>
-                    </h:selectOneMenu><br/><br/>
+                    </p:selectOneRadio  ><br/><br/>
                 </p:column>
             </p:dataTable> <br/>
             

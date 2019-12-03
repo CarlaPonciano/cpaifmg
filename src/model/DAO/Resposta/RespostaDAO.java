@@ -54,7 +54,7 @@ public class RespostaDAO {
     
     public List<RespostaDomain> recuperarRespostasQuestionario(int tipo_questionario_id){
         String sql = "select distinct resposta_id, resposta from tipoquestionario_tipopergunta_tiporesposta_pergunta_resposta "
-                + "where tipo_questionario_id = " + tipo_questionario_id + ";";
+                + "where tipo_questionario_id = " + tipo_questionario_id + " order by resposta_id;";
         try{
             Connection con = ConnectionPostgreSQL.getInstance().getConnection();
             Statement stm = con.createStatement();
