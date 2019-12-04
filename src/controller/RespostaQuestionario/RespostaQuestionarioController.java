@@ -8,19 +8,19 @@ package controller.RespostaQuestionario;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ValueChangeEvent;
 import model.DAO.Pergunta.PerguntaDAO;
 import model.Domain.Pergunta.PerguntaDomain;
 import model.Domain.Resposta.RespostaDomain;
 
 import model.Domain.RespostaQuestionario.RespostaQuestionarioDomain;
 import model.DAO.Resposta.RespostaDAO;
+import model.DAO.RespostaMarcada.RespostaMarcadaDAO;
 import model.DAO.RespostaQuestionarioDAO.RespostaQuestionarioDAO;
+import model.Domain.RespostaQuestionario.RespostaMarcada;
 
 /**
  *
@@ -32,8 +32,8 @@ public class RespostaQuestionarioController{
     public RespostaQuestionarioDomain resposta_questionario;
     private List<PerguntaDomain> lista_pergunta = new ArrayList();
     private List<RespostaDomain> lista_resposta = new ArrayList();
+    private List<RespostaMarcada> lista_resposta_marcada = new ArrayList();
     private int idRespostaSelecionada;
-    private int idPerguntaSelecionada;
 
     public RespostaQuestionarioController() {
         resposta_questionario = new RespostaQuestionarioDomain();
@@ -65,6 +65,14 @@ public class RespostaQuestionarioController{
         this.lista_resposta = lista_resposta;
     }
     
+    public int getIdRespostaSelecionada() {
+        return idRespostaSelecionada;
+    }
+
+    public void setIdRespostaSelecionada(int idRespostaSelecionada) {
+        this.idRespostaSelecionada = idRespostaSelecionada;
+    }
+    
     public List<PerguntaDomain> recuperarPerguntas(){
         PerguntaDAO pergunta_dao = new PerguntaDAO();
         setLista_pergunta(pergunta_dao.recuperarPerguntasQuestionario(1));
@@ -79,8 +87,10 @@ public class RespostaQuestionarioController{
     
     public void cadastrarResposta() throws IOException, InterruptedException{
         RespostaQuestionarioDAO resposta_questionario_dao = new RespostaQuestionarioDAO();
+        RespostaMarcadaDAO resposta_marcada_dao = new RespostaMarcadaDAO();
         FacesContext context = FacesContext.getCurrentInstance();
-        if(resposta_questionario_dao.cadastrarResposta(resposta_questionario)){
+        int index = resposta_questionario_dao.cadastrarResposta(resposta_questionario);
+        if(resposta_marcada_dao.cadastrarListaResposta(lista_resposta_marcada, index)){
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Sucesso", "Questionário respondido com sucesso!"));
             FacesContext.getCurrentInstance().getExternalContext().redirect("responderQuestionarioRedirecionamento.xhtml");
         }else{
@@ -89,25 +99,25 @@ public class RespostaQuestionarioController{
     }
     
     public void respondeuQuestao(int idPergunta){
-        System.out.println("Pergunta: "+idPergunta + " resposta: "+this.getIdRespostaSelecionada());
-        FacesContext context = FacesContext.getCurrentInstance();
-        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Sucesso", "Pergunta: "+idPergunta + " resposta: "+this.getIdRespostaSelecionada()));
-    }
-
-    public int getIdRespostaSelecionada() {
-        return idRespostaSelecionada;
-    }
-
-    public void setIdRespostaSelecionada(int idRespostaSelecionada) {
-        this.idRespostaSelecionada = idRespostaSelecionada;
-    }
-
-    public int getIdPerguntaSelecionada() {
-        return idPerguntaSelecionada;
-    }
-
-    public void setIdPerguntaSelecionada(int idPerguntaSelecionada) {
-        this.idPerguntaSelecionada = idPerguntaSelecionada;
+        RespostaMarcada resposta_marcada = new RespostaMarcada();
+        
+        resposta_marcada.setRespostaquestionario_id(resposta_questionario.getQuestionario_id());
+        resposta_marcada.setId_pergunta(idPergunta);
+        resposta_marcada.setId_resposta(this.getIdRespostaSelecionada());
+        
+        boolean flag = true;
+        if(!lista_resposta_marcada.isEmpty()){
+            for(RespostaMarcada lista : lista_resposta_marcada){
+                if(lista.getId_pergunta() == idPergunta){
+                    lista.setId_resposta(this.getIdRespostaSelecionada());
+                    flag = false;
+                }
+            }
+        }else{
+            lista_resposta_marcada.add(resposta_marcada);
+            flag = false;
+        }
+        if(flag) lista_resposta_marcada.add(resposta_marcada);
     }
     
 }

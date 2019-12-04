@@ -20,24 +20,25 @@ import model.Domain.RespostaQuestionario.RespostaMarcada;
  */
 public class RespostaMarcadaDAO {
     
-    /*public boolean cadastrarListaResposta(List<RespostaMarcada> lista_resposta_marcada){
+    public boolean cadastrarListaResposta(List<RespostaMarcada> lista_resposta_marcada, int index){
+        boolean executou = true;
         for(RespostaMarcada lista : lista_resposta_marcada){
             String sql = "INSERT INTO listarespostamarcada(respostaquestionario_id, resposta_id, pergunta_id) VALUES "
-                            + "('" + lista.getRespostaquestionario_id() + "', '" + lista.getId_resposta() + "', '"
+                            + "(" + index + ", " + lista.getId_resposta() + ", "
                             + lista.getId_pergunta()+ ");";
             try{
                 Connection con = ConnectionPostgreSQL.getInstance().getConnection();
                 Statement stm = con.createStatement();
                 stm.executeUpdate(sql);
-                return true;
             }catch(SQLException e){
-                System.out.println("Erro no cadastro do questionário!");
+                System.out.println("Erro no cadastro das respostas do questionário");
                 System.out.println(sql);
                 System.out.println(e.getMessage());
-                return false;
+                executou = false;
             }
         }
-    }*/
+        return executou;
+    }
     
     
 }

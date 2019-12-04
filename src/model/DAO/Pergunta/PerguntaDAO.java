@@ -35,27 +35,6 @@ public class PerguntaDAO {
         }
     }
     
-    //exemplo retornando o id cadastrado
-    /*public int cadastrarPergunta(PerguntaDomain pergunta){
-        String sql = "INSERT INTO pergunta (pergunta, tipopergunta_id) VALUES "
-                        + "('" + pergunta.getPergunta() + "', " + pergunta.getTipoPergunta().getId() + ") returning id;";
-        try{
-            int idInseridoAgora=0;
-            Connection con = ConnectionPostgreSQL.getInstance().getConnection();
-            Statement stm = con.createStatement();
-            ResultSet resultado = stm.executeQuery(sql);
-            if(resultado.next()){
-                idInseridoAgora=resultado.getInt("id");
-                System.out.println("Id pergunta inserido: "+idInseridoAgora);
-            }
-            return idInseridoAgora;
-        }catch(SQLException e){
-            System.out.println("Erro no cadastro da questão!");
-            System.out.println(e.getMessage());
-            return 0;
-        }
-    }*/
-    
     public List<PerguntaDomain> recuperarPerguntas(){
         String sql = "SELECT P.id AS P_id, P.pergunta, TP.id AS TP_id, TP.tipo FROM pergunta AS P, tipopergunta AS TP"
                     + " WHERE P.tipoPergunta_id = TP.id;";
