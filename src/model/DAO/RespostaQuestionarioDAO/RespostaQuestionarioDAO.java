@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 import model.Connection.ConnectionPostgreSQL;
-import model.Domain.RespostaQuestionario.RespostaMarcada;
+import model.Domain.RespostaQuestionario.RespostaMarcadaDomain;
 import model.Domain.RespostaQuestionario.RespostaQuestionarioDomain;
 
 /**

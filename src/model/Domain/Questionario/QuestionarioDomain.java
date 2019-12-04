@@ -24,10 +24,11 @@ public class QuestionarioDomain {
     private int status_id;
     private String status;
     private TipoPerguntaDomain tipo_pergunta;
+    private int quant_respostas;
 
     public QuestionarioDomain() {}
 
-    public QuestionarioDomain(int id, String nome, String descricao, String criador, int id_tipo_questionario, String tipo_questionario, List<RespostaQuestionarioDomain> resposta_questionario, int status_id, String status, TipoPerguntaDomain tipo_pergunta) {
+    public QuestionarioDomain(int id, String nome, String descricao, String criador, int id_tipo_questionario, String tipo_questionario, List<RespostaQuestionarioDomain> resposta_questionario, int status_id, String status, TipoPerguntaDomain tipo_pergunta, int quant_respostas) {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
@@ -38,6 +39,7 @@ public class QuestionarioDomain {
         this.status_id = status_id;
         this.status = status;
         this.tipo_pergunta = tipo_pergunta;
+        this.quant_respostas = quant_respostas;
     }
 
     public TipoPerguntaDomain getTipo_pergunta() {
@@ -118,6 +120,14 @@ public class QuestionarioDomain {
 
     public void setStatus_id(int status_id) {
         this.status_id = status_id;
+    }
+
+    public int getQuant_respostas() {
+        return quant_respostas;
+    }
+
+    public void setQuant_respostas(int quant_respostas) {
+        this.quant_respostas = quant_respostas;
     }
     
 }

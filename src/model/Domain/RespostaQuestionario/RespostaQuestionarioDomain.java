@@ -20,11 +20,11 @@ public class RespostaQuestionarioDomain {
     private int id_opcao_campus;
     private String nome;
     private String observacoes;
-    private List<RespostaMarcada> resposta_marcada;
+    private List<RespostaMarcadaDomain> resposta_marcada;
 
     public RespostaQuestionarioDomain() {}
 
-    public RespostaQuestionarioDomain(int id, int questionario_id, String semestre_marcado, int id_opcao_disciplina, int id_opcao_curso, int id_opcao_campus, String nome, String observacoes, List<RespostaMarcada> resposta_marcada) {
+    public RespostaQuestionarioDomain(int id, int questionario_id, String semestre_marcado, int id_opcao_disciplina, int id_opcao_curso, int id_opcao_campus, String nome, String observacoes, List<RespostaMarcadaDomain> resposta_marcada) {
         this.id = id;
         this.questionario_id = questionario_id;
         this.semestre_marcado = semestre_marcado;
@@ -100,11 +100,11 @@ public class RespostaQuestionarioDomain {
         this.observacoes = observacoes;
     }
 
-    public List<RespostaMarcada> getResposta_marcada() {
+    public List<RespostaMarcadaDomain> getResposta_marcada() {
         return resposta_marcada;
     }
 
-    public void setResposta_marcada(List<RespostaMarcada> resposta_marcada) {
+    public void setResposta_marcada(List<RespostaMarcadaDomain> resposta_marcada) {
         this.resposta_marcada = resposta_marcada;
     }
     

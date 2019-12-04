@@ -69,7 +69,7 @@ public class QuestionarioDAO {
     }
     
     public List<QuestionarioDomain> recuperarQuestionarios(){
-        String sql = "SELECT * FROM questionario_tipoquestionario_status;";
+        String sql = "SELECT * FROM questionario_tipoquestionario_status_quantrespostas;";
         try{
             Connection con = ConnectionPostgreSQL.getInstance().getConnection();
             Statement stm = con.createStatement();
@@ -84,6 +84,7 @@ public class QuestionarioDAO {
                 questionario.setCriador(rs.getString("usuario_usuario"));
                 questionario.setTipo_questionario(rs.getString("tipo_questionario"));
                 questionario.setStatus(rs.getString("status"));
+                questionario.setQuant_respostas(rs.getInt("quant_respostas"));
                 lista_questionario.add(questionario);
             }
             return lista_questionario;

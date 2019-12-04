@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 import model.Connection.ConnectionPostgreSQL;
-import model.Domain.RespostaQuestionario.RespostaMarcada;
+import model.Domain.RespostaQuestionario.RespostaMarcadaDomain;
 
 /**
  *
@@ -20,9 +20,9 @@ import model.Domain.RespostaQuestionario.RespostaMarcada;
  */
 public class RespostaMarcadaDAO {
     
-    public boolean cadastrarListaResposta(List<RespostaMarcada> lista_resposta_marcada, int index){
+    public boolean cadastrarListaResposta(List<RespostaMarcadaDomain> lista_resposta_marcada, int index){
         boolean executou = true;
-        for(RespostaMarcada lista : lista_resposta_marcada){
+        for(RespostaMarcadaDomain lista : lista_resposta_marcada){
             String sql = "INSERT INTO listarespostamarcada(respostaquestionario_id, resposta_id, pergunta_id) VALUES "
                             + "(" + index + ", " + lista.getId_resposta() + ", "
                             + lista.getId_pergunta()+ ");";

@@ -5,6 +5,7 @@
  */
 package controller.RespostaQuestionario;
 
+import controller.Questionario.QuestionarioController;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +21,7 @@ import model.Domain.RespostaQuestionario.RespostaQuestionarioDomain;
 import model.DAO.Resposta.RespostaDAO;
 import model.DAO.RespostaMarcada.RespostaMarcadaDAO;
 import model.DAO.RespostaQuestionarioDAO.RespostaQuestionarioDAO;
-import model.Domain.RespostaQuestionario.RespostaMarcada;
+import model.Domain.RespostaQuestionario.RespostaMarcadaDomain;
 
 /**
  *
@@ -32,7 +33,7 @@ public class RespostaQuestionarioController{
     public RespostaQuestionarioDomain resposta_questionario;
     private List<PerguntaDomain> lista_pergunta = new ArrayList();
     private List<RespostaDomain> lista_resposta = new ArrayList();
-    private List<RespostaMarcada> lista_resposta_marcada = new ArrayList();
+    private List<RespostaMarcadaDomain> lista_resposta_marcada = new ArrayList();
     private int idRespostaSelecionada;
 
     public RespostaQuestionarioController() {
@@ -96,10 +97,11 @@ public class RespostaQuestionarioController{
         }else{
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"ERRO", "Erro no cadastro da resposta do questionário!"));
         }
+        QuestionarioController.recuperarQuestionarios();
     }
     
     public void respondeuQuestao(int idPergunta){
-        RespostaMarcada resposta_marcada = new RespostaMarcada();
+        RespostaMarcadaDomain resposta_marcada = new RespostaMarcadaDomain();
         
         resposta_marcada.setRespostaquestionario_id(resposta_questionario.getQuestionario_id());
         resposta_marcada.setId_pergunta(idPergunta);
@@ -107,7 +109,7 @@ public class RespostaQuestionarioController{
         
         boolean flag = true;
         if(!lista_resposta_marcada.isEmpty()){
-            for(RespostaMarcada lista : lista_resposta_marcada){
+            for(RespostaMarcadaDomain lista : lista_resposta_marcada){
                 if(lista.getId_pergunta() == idPergunta){
                     lista.setId_resposta(this.getIdRespostaSelecionada());
                     flag = false;

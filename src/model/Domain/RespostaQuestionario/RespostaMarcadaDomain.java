@@ -9,15 +9,15 @@ package model.Domain.RespostaQuestionario;
  *
  * @author carli
  */
-public class RespostaMarcada {
+public class RespostaMarcadaDomain {
     private int id;
     private int respostaquestionario_id;
     private int id_pergunta;
     private int id_resposta;
 
-    public RespostaMarcada() {}
+    public RespostaMarcadaDomain() {}
 
-    public RespostaMarcada(int id, int respostaquestionario_id, int id_pergunta, int id_resposta) {
+    public RespostaMarcadaDomain(int id, int respostaquestionario_id, int id_pergunta, int id_resposta) {
         this.id = id;
         this.respostaquestionario_id = respostaquestionario_id;
         this.id_pergunta = id_pergunta;
