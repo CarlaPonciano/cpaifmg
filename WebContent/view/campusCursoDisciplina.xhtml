@@ -29,6 +29,8 @@
                     <h:commandButton value="Excluir" action="#{disciplinaController.excluirDisciplina(ATUAL_D.id)}"></h:commandButton>
                 </p:column>
             </p:dataTable> <br/>
+        </h:form>
+        <h:form>
             ---Curso--- <br/><br/>
             <h:commandButton value="Cadastrar Curso" action="Curso/cadastrarCurso.xhtml"></h:commandButton> <br/><br/>
             <p:dataTable var="ATUAL_CUR" value="#{cursoController.lista_curso}">
@@ -46,6 +48,8 @@
                     <h:commandButton value="Excluir" action="#{cursoController.excluirCurso(ATUAL_CUR.id)}"></h:commandButton>
                 </p:column>
             </p:dataTable> <br/>
+        </h:form>
+        <h:form>
             ---Campus--- <br/><br/>
             <h:commandButton value="Cadastrar Campus" action="Campus/cadastrarCampus.xhtml"></h:commandButton> <br/><br/>
             <p:dataTable var="ATUAL_CAM" value="#{campusController.listaCampus}">

@@ -82,7 +82,7 @@ public class RespostaQuestionarioController{
         FacesContext context = FacesContext.getCurrentInstance();
         if(resposta_questionario_dao.cadastrarResposta(resposta_questionario)){
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Sucesso", "Questionário respondido com sucesso!"));
-            FacesContext.getCurrentInstance().getExternalContext().redirect("inicial.xhtml");
+            FacesContext.getCurrentInstance().getExternalContext().redirect("responderQuestionarioRedirecionamento.xhtml");
         }else{
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"ERRO", "Erro no cadastro da resposta do questionário!"));
         }
