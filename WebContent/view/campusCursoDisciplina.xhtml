@@ -14,56 +14,50 @@
         <h:form>
             ---Disciplina--- <br/><br/>
             <h:commandButton value="Cadastrar Disciplina" action="Disciplina/cadastrarDisciplina.xhtml"></h:commandButton> <br/><br/>
-            <p:dataTable var="ATUAL" value="#{disciplinaController.lista_disciplina}">
+            <p:dataTable var="ATUAL_D" value="#{disciplinaController.lista_disciplina}">
                 <p:column headerText="id">
-                    <h:outputText value="#{ATUAL.id}" />
+                    <h:outputText value="#{ATUAL_D.id}" />
                 </p:column>
                 <p:column headerText="Disciplina">
-                    <h:outputText value="#{ATUAL.disciplina}" />
+                    <h:outputText value="#{ATUAL_D.disciplina}" />
                 </p:column>
-                
                 <p:column headerText="Curso">
-                    <h:outputText value="#{ATUAL.curso}" />
+                    <h:outputText value="#{ATUAL_D.curso}" />
                 </p:column>
-                
                 <p:column headerText="Ações">
-                    <h:commandButton value="Editar" onclick="#{disciplinaController.setId_Disciplina_editar(ATUAL.id)}" action="Disciplina/editarDisciplina.xhtml"></h:commandButton> .
-                    <h:commandButton value="Excluir" action="#{disciplinaController.excluirDisciplina(ATUAL.id)}"></h:commandButton>
+                    <h:commandButton value="Editar" onclick="#{disciplinaController.setId_Disciplina_editar(ATUAL_D.id)}" action="Disciplina/editarDisciplina.xhtml"></h:commandButton> .
+                    <h:commandButton value="Excluir" action="#{disciplinaController.excluirDisciplina(ATUAL_D.id)}"></h:commandButton>
                 </p:column>
             </p:dataTable> <br/>
             ---Curso--- <br/><br/>
             <h:commandButton value="Cadastrar Curso" action="Curso/cadastrarCurso.xhtml"></h:commandButton> <br/><br/>
-            <p:dataTable var="ATUAL" value="#{cursoController.lista_curso}">
+            <p:dataTable var="ATUAL_CUR" value="#{cursoController.lista_curso}">
                 <p:column headerText="id">
-                    <h:outputText value="#{ATUAL.id}" />
+                    <h:outputText value="#{ATUAL_CUR.id}" />
                 </p:column>
                 <p:column headerText="Curso">
-                    <h:outputText value="#{ATUAL.curso}" />
+                    <h:outputText value="#{ATUAL_CUR.curso}" />
                 </p:column>
-                
                 <p:column headerText="Campus">
-                    <h:outputText value="#{ATUAL.campus}" />
+                    <h:outputText value="#{ATUAL_CUR.campus}" />
                 </p:column>
-                
                 <p:column headerText="Ações">
-                    <h:commandButton value="Editar" onclick="#{cursoController.setId_curso_editar(ATUAL.id)}" action="Curso/editarCurso.xhtml"></h:commandButton> .
-                    <h:commandButton value="Excluir" action="#{cursoController.excluirCurso(ATUAL.id)}"></h:commandButton>
+                    <h:commandButton value="Editar" onclick="#{cursoController.setId_curso_editar(ATUAL_CUR.id)}" action="Curso/editarCurso.xhtml"></h:commandButton> .
+                    <h:commandButton value="Excluir" action="#{cursoController.excluirCurso(ATUAL_CUR.id)}"></h:commandButton>
                 </p:column>
             </p:dataTable> <br/>
             ---Campus--- <br/><br/>
             <h:commandButton value="Cadastrar Campus" action="Campus/cadastrarCampus.xhtml"></h:commandButton> <br/><br/>
-            <p:dataTable var="ATUAL" value="#{campusController.listaCampus}">
+            <p:dataTable var="ATUAL_CAM" value="#{campusController.listaCampus}">
                 <p:column headerText="Id">
-                    <h:outputText value="#{ATUAL.id}" />
+                    <h:outputText value="#{ATUAL_CAM.id}" />
                 </p:column>
-                
                 <p:column headerText="Campus">
-                    <h:outputText value="#{ATUAL.campus}" />
+                    <h:outputText value="#{ATUAL_CAM.campus}" />
                 </p:column>
-                
                 <p:column headerText="Ações">
-                    <h:commandButton value="Editar" onclick="#{campusController.setId_campus_editar(ATUAL.id)}" action="Campus/editarCampus.xhtml"></h:commandButton> .
-                    <h:commandButton value="Excluir" action="#{campusController.excluirCampus(ATUAL.id)}"></h:commandButton>
+                    <h:commandButton value="Editar" onclick="#{campusController.setId_campus_editar(ATUAL_CAM.id)}" action="Campus/editarCampus.xhtml"></h:commandButton> .
+                    <h:commandButton value="Excluir" action="#{campusController.excluirCampus(ATUAL_CAM.id)}"></h:commandButton>
                 </p:column>
             </p:dataTable> <br/>
         </h:form>

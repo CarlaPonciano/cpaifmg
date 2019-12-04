@@ -13,6 +13,7 @@ import java.util.List;
  */
 public class RespostaQuestionarioDomain {
     private int id;
+    private int questionario_id;
     private String semestre_marcado;
     private int id_opcao_disciplina;
     private int id_opcao_curso;
@@ -23,8 +24,9 @@ public class RespostaQuestionarioDomain {
 
     public RespostaQuestionarioDomain() {}
 
-    public RespostaQuestionarioDomain(int id, String semestre_marcado, int id_opcao_disciplina, int id_opcao_curso, int id_opcao_campus, String nome, String observacoes, List<RespostaMarcada> resposta_marcada) {
+    public RespostaQuestionarioDomain(int id, int questionario_id, String semestre_marcado, int id_opcao_disciplina, int id_opcao_curso, int id_opcao_campus, String nome, String observacoes, List<RespostaMarcada> resposta_marcada) {
         this.id = id;
+        this.questionario_id = questionario_id;
         this.semestre_marcado = semestre_marcado;
         this.id_opcao_disciplina = id_opcao_disciplina;
         this.id_opcao_curso = id_opcao_curso;
@@ -32,6 +34,14 @@ public class RespostaQuestionarioDomain {
         this.nome = nome;
         this.observacoes = observacoes;
         this.resposta_marcada = resposta_marcada;
+    }
+
+    public int getQuestionario_id() {
+        return questionario_id;
+    }
+
+    public void setQuestionario_id(int questionario_id) {
+        this.questionario_id = questionario_id;
     }
 
     public int getId() {

@@ -9,15 +9,35 @@ package model.Domain.RespostaQuestionario;
  *
  * @author carli
  */
-class RespostaMarcada {
+public class RespostaMarcada {
+    private int id;
+    private int respostaquestionario_id;
     private int id_pergunta;
     private int id_resposta;
 
     public RespostaMarcada() {}
 
-    public RespostaMarcada(int id_pergunta, int id_resposta) {
+    public RespostaMarcada(int id, int respostaquestionario_id, int id_pergunta, int id_resposta) {
+        this.id = id;
+        this.respostaquestionario_id = respostaquestionario_id;
         this.id_pergunta = id_pergunta;
         this.id_resposta = id_resposta;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getRespostaquestionario_id() {
+        return respostaquestionario_id;
+    }
+
+    public void setRespostaquestionario_id(int respostaquestionario_id) {
+        this.respostaquestionario_id = respostaquestionario_id;
     }
 
     public int getId_pergunta() {

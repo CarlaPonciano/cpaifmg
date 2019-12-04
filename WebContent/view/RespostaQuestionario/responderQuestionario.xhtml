@@ -13,7 +13,7 @@
 	---Responder Questionário---<br/><br/>
         <h:form>
             Selecione o questionário:
-            <h:selectOneMenu value="#{questionarioController.questionario.id_tipo_questionario}">
+            <h:selectOneMenu value="#{respostaQuestionarioController.resposta_questionario.questionario_id}">
                 <f:selectItems value="#{questionarioController.lista_questionario}" var="ATUAL" itemValue="#{ATUAL.id}" itemLabel="#{ATUAL.nome}">
                 </f:selectItems>
             </h:selectOneMenu><br/><br/>
@@ -39,12 +39,14 @@
             </h:selectOneMenu><br/><br/>
             <h:outputLabel>Informe o nome se desejar: </h:outputLabel>  <h:inputText value="#{respostaQuestionarioController.resposta_questionario.nome}"/> <br/><br/>
             
-            <p:dataTable var="ATUAL" value="#{respostaQuestionarioController.lista_pergunta}">
+            <p:dataTable var="ATUAL_P" value="#{respostaQuestionarioController.lista_pergunta}">
                 <p:column headerText="Responda as perguntas:">
-                    <h:outputText value="#{ATUAL.pergunta}" /><br/><br/>
-                    <p:selectOneRadio   value="#{respostaQuestionarioController.resposta_questionario.resposta_marcada}">
-                        <f:selectItems  value="#{respostaQuestionarioController.lista_resposta}" var="ATUAL" itemValue="#{ATUAL.id}" itemLabel="#{ATUAL.resposta}">
+                    <h:outputText value="#{ATUAL_P.pergunta}" /><br/><br/>
+                    <p:selectOneRadio value="#{respostaQuestionarioController.idRespostaSelecionada}"  >
+                        <f:selectItems  value="#{respostaQuestionarioController.lista_resposta}" var="ATUAL_R" itemValue="#{ATUAL_R.id}" itemLabel="#{ATUAL_R.resposta}">
                         </f:selectItems>
+                        <f:attribute name="idPergunta" value="#{ATUAL_P.id}"/>
+                        <f:ajax listener="#{respostaQuestionarioController.respondeuQuestao(ATUAL_P.id)}" event="change" render="@this"/>
                     </p:selectOneRadio  ><br/><br/>
                 </p:column>
             </p:dataTable> <br/>
