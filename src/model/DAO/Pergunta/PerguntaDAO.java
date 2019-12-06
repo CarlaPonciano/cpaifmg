@@ -29,7 +29,7 @@ public class PerguntaDAO {
             stm.executeUpdate(sql);
             return true;
         }catch(SQLException e){
-            System.out.println("Erro no cadastro da questão!");
+            System.out.println("Erro no cadastro da quest�o!");
             System.out.println(e.getMessage());
             return false;
         }
@@ -60,7 +60,7 @@ public class PerguntaDAO {
             }
             return lista_pergunta;
         }catch(SQLException e){
-            System.out.println("Erro na recuperação das questões!");
+            System.out.println("Erro na recuperaç�o das questões!");
             System.out.println(e.getMessage());
             return null;
         }

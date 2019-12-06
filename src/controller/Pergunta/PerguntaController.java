@@ -5,9 +5,12 @@
  */
 package controller.Pergunta;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.List;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import model.DAO.Pergunta.PerguntaDAO;
 import model.Domain.Pergunta.PerguntaDomain;
 
@@ -19,9 +22,15 @@ import model.Domain.Pergunta.PerguntaDomain;
 @javax.faces.bean.SessionScoped
 public class PerguntaController implements Serializable{
     PerguntaDomain pergunta;
-    public boolean cadastrarPergunta(){
+    public void cadastrarPergunta() throws IOException{
         PerguntaDAO pergunta_dao = new PerguntaDAO();
-        return pergunta_dao.cadastrarPergunta(pergunta);
+        FacesContext context = FacesContext.getCurrentInstance();
+        if (pergunta_dao.cadastrarPergunta(pergunta)) {
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Sucesso", "Questão cadastrada com sucesso!"));
+            FacesContext.getCurrentInstance().getExternalContext().redirect("../index.xhtml");
+        }else{
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"ERRO", "Erro ao cadastrar questão!"));
+        }
     }
     
     public List<PerguntaDomain> recuperarPerguntas() throws SQLException{
