@@ -24,20 +24,21 @@ import model.Domain.Curso.CursoDomain;
 @ManagedBean(name = "cursoController")
 @SessionScoped
 public class CursoController {
+
     private CursoDomain curso = new CursoDomain();
     private List<CursoDomain> lista_curso = new ArrayList();
     private int id_curso_editar;
-    
+
     public CursoController() {
         recuperarCurso();
     }
-    
+
     public CursoDomain getCurso() {
-            return curso;
+        return curso;
     }
 
     public void setCurso(CursoDomain curso) {
-            this.curso = curso;
+        this.curso = curso;
     }
 
     public List<CursoDomain> getLista_curso() {
@@ -59,39 +60,39 @@ public class CursoController {
     public void cadastrarCurso() {
         CursoDAO curso_dao = new CursoDAO();
         FacesContext context = FacesContext.getCurrentInstance();
-        if(curso_dao.cadastrarCurso(curso)){
-            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Sucesso", "Curso cadastrado com sucesso!"));
-        }else{
-            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"ERRO", "Erro no cadastro do curso!"));
+        if (curso_dao.cadastrarCurso(curso)) {
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Curso cadastrado com sucesso!"));
+        } else {
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERRO", "Erro no cadastro do curso!"));
         }
     }
-    
-    public void atualizarCurso() throws IOException{
+
+    public void atualizarCurso() throws IOException {
         curso.setId(id_curso_editar);
         CursoDAO curso_dao = new CursoDAO();
         FacesContext context = FacesContext.getCurrentInstance();
-        if(curso_dao.atualizarCurso(curso)){
-            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Sucesso", "Curso atualizado com sucesso!"));
+        if (curso_dao.atualizarCurso(curso)) {
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Curso atualizado com sucesso!"));
             FacesContext.getCurrentInstance().getExternalContext().redirect("../campusCursoDisciplina.xhtml");
-        }else{
-            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"ERRO", "Erro na atualização do cruso!"));
+        } else {
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERRO", "Erro na atualização do cruso!"));
         }
         recuperarCurso();
     }
-    
-    public void excluirCurso(int id) throws IOException{
+
+    public void excluirCurso(int id) throws IOException {
         CursoDAO curso_dao = new CursoDAO();
         FacesContext context = FacesContext.getCurrentInstance();
-        if(curso_dao.excluirCurso(id)){
-            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Sucesso", "Curso excluído com sucesso!"));
+        if (curso_dao.excluirCurso(id)) {
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Curso excluído com sucesso!"));
             FacesContext.getCurrentInstance().getExternalContext().redirect("campusCursoDisciplina.xhtml");
-        }else{
-            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"ERRO", "Erro na exclusão do curso!"));
+        } else {
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERRO", "Erro na exclusão do curso!"));
         }
         recuperarCurso();
     }
-    
-    public List<CursoDomain> recuperarCurso(){
+
+    public List<CursoDomain> recuperarCurso() {
         CursoDAO curso_dao = new CursoDAO();
         setLista_curso(curso_dao.recuperarCurso());
         return lista_curso;

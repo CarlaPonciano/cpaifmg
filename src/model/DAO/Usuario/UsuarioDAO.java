@@ -27,11 +27,11 @@ public class UsuarioDAO {
             Statement stmValidacao = con.createStatement();
             ResultSet rs = stmValidacao.executeQuery(sqlValidacao);
             if (rs.next()) {
-                System.out.println("ERRO: J√° existe um usu√°rio cadastrado com o nome de usu√°rio e/ou o e-mail informados.");
+                System.out.println("ERRO: J· existe um usu·rio cadastrado com o nome de usu·rio e/ou o e-mail informados.");
                 return false;
             }
         } catch (SQLException e) {
-            System.out.println("Erro ao validar o usu√°rio!");
+            System.out.println("Erro ao validar o usu·rio!");
             System.out.println(e.getMessage());
             return false;
         }
@@ -45,7 +45,7 @@ public class UsuarioDAO {
             stm.executeUpdate(sql);
             return true;
         }catch(SQLException e){
-            System.out.println("Erro no cadastro do usu√°rio!");
+            System.out.println("Erro no cadastro do usu·rio!");
             System.out.println(e.getMessage());
             return false;
         }
@@ -61,11 +61,11 @@ public class UsuarioDAO {
             Statement stmValidacao = con.createStatement();
             ResultSet rs = stmValidacao.executeQuery(sqlValidacao);
             if (rs.next()) {
-                System.out.println("ERRO: J√° existe um usu√°rio cadastrado com o e-mail informado.");
+                System.out.println("ERRO: J· existe um usu·rio cadastrado com o e-mail informado.");
                 return false;
             }
         } catch (SQLException e) {
-            System.out.println("Erro ao validar o usu√°rio!");
+            System.out.println("Erro ao validar o usu·rio!");
             System.out.println(e.getMessage());
             return false;
         }
@@ -79,7 +79,7 @@ public class UsuarioDAO {
             stm.executeUpdate(sql);
             return true;
         }catch(SQLException e){
-            System.out.println("Erro no atualizar o usu√°rio!");
+            System.out.println("Erro no atualizar o usu·rio!");
             System.out.println(e.getMessage());
             return false;
         }
@@ -106,7 +106,7 @@ public class UsuarioDAO {
                 return usuario;
             }
         }catch(SQLException e){
-            System.out.println("Erro na recupera√ß√£o do usu√°rio!");
+            System.out.println("Erro na recuperaÁ„o do usu·rio!");
             System.out.println(e.getMessage());
             return null;
         }
@@ -123,7 +123,7 @@ public class UsuarioDAO {
             stm.executeUpdate(sql);
             return true;
         }catch(SQLException e){
-            System.out.println("Erro ao inativar o usu√°rio!");
+            System.out.println("Erro ao inativar o usu·rio!");
             System.out.println(e.getMessage());
             return false;
         }
@@ -139,7 +139,7 @@ public class UsuarioDAO {
             stm.executeUpdate(sql);
             return true;
         }catch(SQLException e){
-            System.out.println("Erro ao ativar o usu√°rio!");
+            System.out.println("Erro ao ativar o usu·rio!");
             System.out.println(e.getMessage());
             return false;
         }
