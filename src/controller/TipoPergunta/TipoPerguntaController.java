@@ -10,12 +10,17 @@ import java.util.List;
 import model.DAO.TipoPergunta.TipoPerguntaDAO;
 import model.Domain.TipoPergunta.TipoPerguntaDomain;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+
 /**
  *
  * @author amanda
  */
-@javax.faces.bean.ManagedBean(name = "tipoPerguntaController")
-@javax.faces.bean.SessionScoped
+@ManagedBean(name = "tipoPerguntaController")
+@SessionScoped
 public class TipoPerguntaController{
     private List<TipoPerguntaDomain> lista_tipo_pergunta = new ArrayList();
 

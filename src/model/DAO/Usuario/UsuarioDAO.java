@@ -5,11 +5,13 @@
  */
 package model.DAO.Usuario;
 
+import controller.Usuario.UsuarioController;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import model.Connection.ConnectionPostgreSQL;
+import model.Connection.SessionUtil;
 import model.Domain.Usuario.UsuarioDomain;
 
 /**
@@ -53,7 +55,6 @@ public class UsuarioDAO {
     }
     
     public boolean atualizarUsuario(UsuarioDomain usuario){
-        
         String sqlValidacao = "SELECT * FROM usuario"
                             + " WHERE email = '" + usuario.getEmail() + "';";
         try {
@@ -72,7 +73,7 @@ public class UsuarioDAO {
         
         String sql = "UPDATE usuario"
                     + " SET nome = '" + usuario.getNome() + "', sobrenome = '" + usuario.getSobrenome() + "', email = '" + usuario.getEmail() + "', senha = '" + usuario.getSenha() + "'"
-                    + " WHERE usuario = '" + usuario.getUsuario() + "';";
+                    + " WHERE usuario = '" + UsuarioController.recuperarSessaoNomeUsuario() + "';";
         try{
             Connection con = ConnectionPostgreSQL.getInstance().getConnection();
             Statement stm = con.createStatement();
@@ -148,12 +149,12 @@ public class UsuarioDAO {
     public boolean login(UsuarioDomain usuario){
         String sql = "SELECT * FROM usuario"
                     + " WHERE usuario = '" + usuario.getUsuario() + "'"
-                    + " AND senha = '" + usuario.getSenha() + "';";
+                    + " AND senha = '" + usuario.getSenha() + "' AND ativo = 1;";
         try {
             Connection con = ConnectionPostgreSQL.getInstance().getConnection();
-            Statement stmValidacao = con.createStatement();
-            ResultSet rs = stmValidacao.executeQuery(sql);
-            if (rs.next()) {
+            Statement stm = con.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            if(rs.next()){
                 return true;
             }else{
                 return false;

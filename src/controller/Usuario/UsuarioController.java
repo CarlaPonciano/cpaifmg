@@ -20,11 +20,12 @@ import model.Domain.Usuario.UsuarioDomain;
 @ManagedBean(name = "usuarioController")
 @SessionScoped
 public class UsuarioController{
-    private UsuarioDomain sessao = null;
-    private UsuarioDomain usuario = new UsuarioDomain();
-    private String usuario_form, senha_form;
+    private static UsuarioDomain sessao;
+    private UsuarioDomain usuario;
+    private String senha_form;
 
     public UsuarioController() {
+        usuario = new UsuarioDomain();
         recuperarUsuario();
     }
 
@@ -36,31 +37,37 @@ public class UsuarioController{
         this.usuario = usuario;
     }
 
-    public String getUsuario_editar() {
-        return usuario_form;
+    public UsuarioDomain getSessao() {
+        if(sessao != null){
+            return sessao;
+        }else{
+            UsuarioDomain retorno = new UsuarioDomain();
+            retorno.setUsuario("Faça Login!");
+            return retorno;
+        }
     }
 
-    public void setUsuario_editar(String usuario_form) {
-        this.usuario_form = usuario_form;
+    public void setSessao(UsuarioDomain sessao) {
+        this.sessao = sessao;
     }
     
-    public void persistirUsuario(){
+    public void persistirUsuario() throws IOException{
         UsuarioDAO usuario_dao = new UsuarioDAO();
         FacesContext context = FacesContext.getCurrentInstance();
         if(usuario_dao.persistirUsuario(usuario)){
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Sucesso", "Conta criada com sucesso!"));
+            FacesContext.getCurrentInstance().getExternalContext().redirect("../index.xhtml");
         }else{
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"ERRO", "Erro ao criar conta!"));
         }
     }
     
     public void atualizarUsuario() throws IOException{
-        usuario.setUsuario(usuario_form);
         UsuarioDAO usuario_dao = new UsuarioDAO();
         FacesContext context = FacesContext.getCurrentInstance();
         if (usuario_dao.atualizarUsuario(usuario)) {
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Conta atualizada com sucesso!"));
-            FacesContext.getCurrentInstance().getExternalContext().redirect("../editarConta.xhtml");
+            FacesContext.getCurrentInstance().getExternalContext().redirect("../index.xhtml");
         } else {
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERRO", "Erro na atualização da conta!"));
         }
@@ -69,20 +76,17 @@ public class UsuarioController{
     
     public UsuarioDomain recuperarUsuario(){
         UsuarioDAO usuario_dao = new UsuarioDAO();
-        UsuarioDomain u = new UsuarioDomain();
-        u.setUsuario(usuario_form);
-        setUsuario(usuario_dao.recuperarUsuario(u));
+        setUsuario(usuario_dao.recuperarUsuario(usuario));
         return usuario;
     }
     
     public void inativarUsuario() throws IOException{
         UsuarioDAO usuario_dao = new UsuarioDAO();
-        UsuarioDomain u = new UsuarioDomain();
-        u.setUsuario(usuario_form);
         FacesContext context = FacesContext.getCurrentInstance();
-        if (usuario_dao.inativarUsuario(u)) {
+        if (usuario_dao.inativarUsuario(usuario)) {
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Perfil inativado com sucesso!"));
-            FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
+            sessao = null;
+            FacesContext.getCurrentInstance().getExternalContext().redirect("../index.xhtml");
         } else {
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERRO", "Erro ao inativar perfil!"));
         }
@@ -90,10 +94,8 @@ public class UsuarioController{
     
     public void ativarUsuario() throws IOException{
         UsuarioDAO usuario_dao = new UsuarioDAO();
-        UsuarioDomain u = new UsuarioDomain();
-        u.setUsuario(usuario_form);
         FacesContext context = FacesContext.getCurrentInstance();
-        if (usuario_dao.ativarUsuario(u)) {
+        if (usuario_dao.ativarUsuario(usuario)) {
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Conta ativado com sucesso!"));
             FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
         } else {
@@ -102,21 +104,25 @@ public class UsuarioController{
     }
     
     public void login() throws IOException{
-        UsuarioDAO usuario_dao = new UsuarioDAO();
-        UsuarioDomain u = new UsuarioDomain();
-        u.setUsuario(usuario_form);
-        u.setSenha(senha_form);
         FacesContext context = FacesContext.getCurrentInstance();
-        if (usuario_dao.login(u)) {
-            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Login realizado com sucesso!"));
-            FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
-        } else {
-            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERRO", "Erro ao fazer login!"));
+        if(sessao != null){
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERRO", "Login já feito"));
+        }else{
+            UsuarioDAO usuario_dao = new UsuarioDAO();
+            if(usuario_dao.login(usuario)) {
+                sessao = usuario_dao.recuperarUsuario(usuario);
+                context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Login realizado com sucesso!"));
+                FacesContext.getCurrentInstance().getExternalContext().redirect("../index.xhtml");
+            } else {
+                context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERRO", "Erro ao fazer login!"));
+            }
         }
     }
     
-    public UsuarioDomain getSession(){
-        return sessao;
+    public static String recuperarSessaoNomeUsuario(){
+        if(sessao != null)
+            return sessao.getUsuario();
+        return "Não Logado!";
     }
     
     public void logout(){

@@ -6,15 +6,16 @@
       xmlns:p="http://primefaces.org/ui">
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Sistema CPA | Login</title>
+        <title>Login | Sistema CPA</title>
     </h:head>
+    <p:growl id="growl1" showDetail="true"  keepAlive="1000"  /> 
     <h:body>
-        ---Sistema CPA--- <br/>
-        ---Login--- <br/>
+        ---Sistema CPA--- <br/><br/>
+        ---Login--- <br/><br/>
         <h:form>
             <h:outputLabel>Nome de usuário: </h:outputLabel><h:inputText value="#{usuarioController.usuario.usuario}"/><br/><br/>
             <h:outputLabel>Senha: </h:outputLabel><h:inputText value="#{usuarioController.usuario.senha}"/><br/><br/>
-            <h:commandButton value="Fazer Login"  actionListener="#{usuarioController.login}"/><br/>
+            <h:commandButton value="Fazer Login" action="#{usuarioController.login()}"/><br/>
         </h:form>
     </h:body>
 </html>

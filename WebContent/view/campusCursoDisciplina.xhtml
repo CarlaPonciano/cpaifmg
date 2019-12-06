@@ -15,9 +15,6 @@
             ---Disciplina--- <br/><br/>
             <h:commandButton value="Cadastrar Disciplina" action="Disciplina/cadastrarDisciplina.xhtml"></h:commandButton> <br/><br/>
             <p:dataTable var="ATUAL_D" value="#{disciplinaController.lista_disciplina}">
-                <p:column headerText="id">
-                    <h:outputText value="#{ATUAL_D.id}" />
-                </p:column>
                 <p:column headerText="Disciplina">
                     <h:outputText value="#{ATUAL_D.disciplina}" />
                 </p:column>
@@ -34,9 +31,6 @@
             ---Curso--- <br/><br/>
             <h:commandButton value="Cadastrar Curso" action="Curso/cadastrarCurso.xhtml"></h:commandButton> <br/><br/>
             <p:dataTable var="ATUAL_CUR" value="#{cursoController.lista_curso}">
-                <p:column headerText="id">
-                    <h:outputText value="#{ATUAL_CUR.id}" />
-                </p:column>
                 <p:column headerText="Curso">
                     <h:outputText value="#{ATUAL_CUR.curso}" />
                 </p:column>
@@ -53,9 +47,6 @@
             ---Campus--- <br/><br/>
             <h:commandButton value="Cadastrar Campus" action="Campus/cadastrarCampus.xhtml"></h:commandButton> <br/><br/>
             <p:dataTable var="ATUAL_CAM" value="#{campusController.listaCampus}">
-                <p:column headerText="Id">
-                    <h:outputText value="#{ATUAL_CAM.id}" />
-                </p:column>
                 <p:column headerText="Campus">
                     <h:outputText value="#{ATUAL_CAM.campus}" />
                 </p:column>

@@ -10,15 +10,14 @@
 </h:head>
 <h:body>
 <p:growl id="growl1" showDetail="true"  keepAlive="1000"  /> 
-     ---Editar Conta--- <br/>
-     <h:form>
+    ---Editar Conta--- <br/><br/>
+    <h:form>
         <h:outputLabel>Nome: </h:outputLabel><h:inputText size="20" value="#{usuarioController.usuario.nome}" /><br/><br/>
         <h:outputLabel>Sobrenome: </h:outputLabel><h:inputText value="#{usuarioController.usuario.sobrenome}"/><br/><br/>
         <h:outputLabel>E-mail: </h:outputLabel><h:inputText value="#{usuarioController.usuario.email}"/><br/><br/>
         <h:outputLabel>Senha: </h:outputLabel><h:inputText value="#{usuarioController.usuario.senha}"/><br/><br/>
-        <h:commandButton value="Editar Conta"  action="#{usuarioController.atualizarUsuario()}"/><br/><br/>
-        <br/>
-        <h:commandButton value="Inativar Conta"  action="#{usuarioController.inativarUsuario()}"/><br/><br/>
+        <h:commandButton value="Editar Conta" action="#{usuarioController.atualizarUsuario()}"/> .
+        <h:commandButton value="Inativar Conta" action="#{usuarioController.inativarUsuario()}"/><br/><br/>
     </h:form>
 </h:body>
 </html>
