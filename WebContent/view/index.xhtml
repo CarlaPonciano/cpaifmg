@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" 	xmlns:h="http://java.sun.com/jsf/html"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 	xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
-    <h:head>
+      xmlns:p="http://primefaces.org/ui"
+      template="/admin.xhtml"> 
+    <!--<h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title>Sistema CPA</title>
-    </h:head>
-    <h:body>
-        ---Sistema CPA--- <br/><br/>
+    </h:head>-->
+    <ui:define name="head">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Sistema CPA</title>
+    </ui:define>
+    <ui:define name="body">
+        <ui:define name="title">
+            <h2 class="align-center">---Sistema CPA---</h2>
+        </ui:define>
         <h:form>
             <h:outputLabel rendered="#{usuarioController.estaLogado()}">Olá </h:outputLabel><h:outputLabel rendered="#{usuarioController.estaLogado()}">#{usuarioController.usuario.nome} </h:outputLabel><br/><br/>
             <h:commandButton rendered="#{usuarioController.estaLogado()}" value="Gerenciar Questionários" action="Questionario/inicial.xhtml"></h:commandButton> <br/><br/>
@@ -21,5 +28,5 @@
             <h:commandButton rendered="#{usuarioController.estaLogado()}" value="Editar Conta" action="Usuario/editarUsuario.xhtml"></h:commandButton><br/><br/>
             <h:commandButton rendered="#{!usuarioController.estaLogado()}" value="Responder Questionários" action="RespostaQuestionario/responderQuestionario.xhtml"></h:commandButton><br/><br/>
         </h:form>
-    </h:body>
-</html>
+    </ui:define>
+</ui:composition>
