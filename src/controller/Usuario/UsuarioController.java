@@ -109,9 +109,10 @@ public class UsuarioController{
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERRO", "Login já feito"));
         }else{
             UsuarioDAO usuario_dao = new UsuarioDAO();
-            if(usuario_dao.login(usuario)) {
-                sessao = usuario_dao.recuperarUsuario(usuario);
+            if(usuario_dao.login(usuario) != null) {
+                sessao = usuario_dao.login(usuario);
                 context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Login realizado com sucesso!"));
+                SessionContext.getInstance().setAttribute("usuarioLogado", sessao);
                 FacesContext.getCurrentInstance().getExternalContext().redirect("../index.xhtml");
             } else {
                 context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERRO", "Erro ao fazer login!"));
@@ -127,6 +128,7 @@ public class UsuarioController{
     
     public void logout(){
         this.sessao = null;
+        SessionContext.getInstance().encerrarSessao();
     }
     
 }

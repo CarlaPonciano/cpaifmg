@@ -146,7 +146,7 @@ public class UsuarioDAO {
         }
     }
     
-    public boolean login(UsuarioDomain usuario){
+    public UsuarioDomain login(UsuarioDomain usuario){
         String sql = "SELECT * FROM usuario"
                     + " WHERE usuario = '" + usuario.getUsuario() + "'"
                     + " AND senha = '" + usuario.getSenha() + "' AND ativo = 1;";
@@ -155,14 +155,17 @@ public class UsuarioDAO {
             Statement stm = con.createStatement();
             ResultSet rs = stm.executeQuery(sql);
             if(rs.next()){
-                return true;
+                usuario.setNome(rs.getString("nome"));
+                usuario.setSobrenome(rs.getString("sobrenome"));
+                usuario.setEmail(rs.getString("email"));
+                return usuario;
             }else{
-                return false;
+                return null;
             }
         } catch (SQLException e) {
             System.out.println("Erro ao fazer login!");
             System.out.println(e.getMessage());
-            return false;
+            return null;
         }
     }
 }
