@@ -5,6 +5,7 @@
  */
 package model.DAO.Questionario;
 
+import controller.Usuario.UsuarioController;
 import model.Domain.Questionario.QuestionarioDomain;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -54,22 +55,38 @@ public class QuestionarioDAO {
     }
     
     public boolean excluirQuestionario(int id){
-        String sql = "DELETE FROM questionario WHERE id = " + id + ";";
+        List<String> id_resposta = new ArrayList();
+        String sql = "SELECT id FROM respostaquestionario WHERE questionario_id = " + id + ";";
         try{
             Connection con = ConnectionPostgreSQL.getInstance().getConnection();
             Statement stm = con.createStatement();
-            stm.executeUpdate(sql);
+            ResultSet rs = stm.executeQuery(sql);
+            while(rs.next()){
+                String sql2 = "DELETE FROM listarespostamarcada where respostaquestionario_id =  " + rs.getInt("id") + ";";
+                id_resposta.add(sql2);
+                String sql3 = "DELETE FROM respostaquestionario where id =  " + rs.getInt("id") + ";";
+                id_resposta.add(sql3);
+            }
+            for(String lista : id_resposta){
+                try{
+                    stm.executeUpdate(lista);
+                }catch(SQLException e){
+                    System.out.println("Erro na exclusão das respostas do questionário!");
+                    System.out.println(e.getMessage());
+                }
+            }
+            String sql3 = "DELETE FROM questionario WHERE id = " + id + ";";
+            stm.executeUpdate(sql3);
             return true;
         }catch(SQLException e){
             System.out.println("Erro na exclusão do questionário!");
-            System.out.println(sql);
             System.out.println(e.getMessage());
             return false;
         }
     }
     
     public List<QuestionarioDomain> recuperarQuestionarios(){
-        String sql = "SELECT * FROM questionario_tipoquestionario_status_quantrespostas;";
+        String sql = "SELECT * FROM questionario_tipoquestionario_status_quantrespostas WHERE usuario_usuario = '" + UsuarioController.recuperarSessaoNomeUsuario() + "';";
         try{
             Connection con = ConnectionPostgreSQL.getInstance().getConnection();
             Statement stm = con.createStatement();

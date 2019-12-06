@@ -37,16 +37,6 @@ public class UsuarioController{
         this.usuario = usuario;
     }
 
-    public UsuarioDomain getSessao() {
-        if(sessao != null){
-            return sessao;
-        }else{
-            UsuarioDomain retorno = new UsuarioDomain();
-            retorno.setUsuario("Faça Login!");
-            return retorno;
-        }
-    }
-
     public void setSessao(UsuarioDomain sessao) {
         this.sessao = sessao;
     }
@@ -124,6 +114,11 @@ public class UsuarioController{
         if(sessao != null)
             return sessao.getUsuario();
         return "Não Logado!";
+    }
+    
+    public boolean estaLogado(){
+        if(sessao != null) return true;
+        return false;
     }
     
     public void logout(){

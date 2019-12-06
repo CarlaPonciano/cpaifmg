@@ -11,14 +11,15 @@
     <h:body>
         ---Sistema CPA--- <br/><br/>
         <h:form>
-            <h:outputLabel rendered="#{usuarioController.sessao != null}">Olá </h:outputLabel><h:inputText rendered="#{usuarioController.sessao != null}"  value="#{usuarioController.sessao.usuario}" /><br/><br/>
-            <h:commandButton rendered="#{usuarioController.sessao != null}" value="Gerenciar Questionários" action="Questionario/inicial.xhtml"></h:commandButton> <br/><br/>
-            <h:commandButton rendered="#{usuarioController.sessao != null}" value="Cadastrar Nova Questão" action="Pergunta/cadastrarPergunta.xhtml"></h:commandButton> <br/><br/>
-            <h:commandButton rendered="#{usuarioController.sessao != null}" value="Gerenciar Campus, Cursos e Disciplinas" action="campusCursoDisciplina.xhtml"></h:commandButton> <br/><br/>
-            <h:commandButton rendered="#{usuarioController.sessao == null}" value="Criar Conta" action="Usuario/cadastrarUsuario.xhtml"></h:commandButton> .
-            <h:commandButton rendered="#{usuarioController.sessao == null}" value="Fazer Login" action="Usuario/login.xhtml"></h:commandButton> . 
-            <h:commandButton rendered="#{usuarioController.sessao != null}" value="Editar Conta" action="Usuario/editarUsuario.xhtml"></h:commandButton><br/><br/>
-            <h:commandButton rendered="#{usuarioController.sessao != null}" value="Responder Questionários" action="RespostaQuestionario/responderQuestionario.xhtml"></h:commandButton><br/><br/>
+            <h:outputLabel rendered="#{usuarioController.estaLogado()}">Olá </h:outputLabel><h:inputText rendered="#{usuarioController.estaLogado()}"  value="#{usuarioController.sessao.usuario}" /><br/><br/>
+            <h:commandButton rendered="#{usuarioController.estaLogado()}" value="Gerenciar Questionários" action="Questionario/inicial.xhtml"></h:commandButton> <br/><br/>
+            <h:commandButton rendered="#{usuarioController.estaLogado()}" value="Cadastrar Nova Questão" action="Pergunta/cadastrarPergunta.xhtml"></h:commandButton> <br/><br/>
+            <h:commandButton rendered="#{usuarioController.estaLogado()}" value="Gerenciar Campus, Cursos e Disciplinas" action="campusCursoDisciplina.xhtml"></h:commandButton> <br/><br/>
+            <h:commandButton rendered="#{!usuarioController.estaLogado()}" value="Criar Conta" action="Usuario/cadastrarUsuario.xhtml"></h:commandButton>
+            <h:commandButton rendered="#{!usuarioController.estaLogado()}" value="Fazer Login" action="Usuario/login.xhtml"></h:commandButton>
+            <h:commandButton rendered="#{usuarioController.estaLogado()}" value="Fazer Logout" action="#{usuarioController.logout()}"></h:commandButton>
+            <h:commandButton rendered="#{usuarioController.estaLogado()}" value="Editar Conta" action="Usuario/editarUsuario.xhtml"></h:commandButton><br/><br/>
+            <h:commandButton rendered="#{usuarioController.estaLogado()}" value="Responder Questionários" action="RespostaQuestionario/responderQuestionario.xhtml"></h:commandButton><br/><br/>
         </h:form>
     </h:body>
 </html>

@@ -17,10 +17,6 @@
             <!--Tabela listando os questionário cadastrados-->
             ---Questionários Cadastrados---<br/><br/>
             <p:dataTable var="ATUAL" value="#{questionarioController.lista_questionario}">
-                <p:column headerText="Id">
-                    <h:outputText value="#{ATUAL.id}"  />
-                </p:column>
-
                 <p:column headerText="Nome">
                     <h:outputText value="#{ATUAL.nome}" />
                 </p:column>
@@ -31,10 +27,6 @@
 
                 <p:column headerText="Tipo">
                     <h:outputText value="#{ATUAL.tipo_questionario}" />
-                </p:column>
-                
-                <p:column headerText="Criado Por">
-                    <h:outputText value="#{ATUAL.criador}" />
                 </p:column>
                 
                 <p:column headerText="Status">
@@ -55,10 +47,6 @@
             <h:commandButton value="Cadastrar Tipo Questionário" action="cadastrarTipoQuestionario.xhtml"></h:commandButton><br/><br/>
             ---Tipos de Questionários Cadastrados---<br/><br/>
             <p:dataTable var="ATUAL" value="#{tipoQuestionarioController.lista_tipo_questionario}">
-                <p:column headerText="Id">
-                    <h:outputText value="#{ATUAL.id}"  />
-                </p:column>
-
                 <p:column headerText="Nome">
                     <h:outputText value="#{ATUAL.nome}" />
                 </p:column>

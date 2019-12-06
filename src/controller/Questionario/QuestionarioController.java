@@ -5,6 +5,7 @@
  */
 package controller.Questionario;
 
+import controller.Usuario.UsuarioController;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -67,15 +68,16 @@ public class QuestionarioController {
     }
     
     public void cadastrarQuestionario() throws IOException, InterruptedException{
+        questionario.setCriador(UsuarioController.recuperarSessaoNomeUsuario());
         QuestionarioDAO questionario_dao = new QuestionarioDAO();
         FacesContext context = FacesContext.getCurrentInstance();
         if(questionario_dao.cadastrarQuestionario(questionario)){
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Sucesso", "Questionário cadastrado com sucesso!"));
+            recuperarQuestionarios();
             FacesContext.getCurrentInstance().getExternalContext().redirect("inicial.xhtml");
         }else{
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"ERRO", "Erro no cadastro do questionário!"));
         }
-        recuperarQuestionarios();
     }
     
     public void excluirQuestionario(int id) throws IOException{
@@ -83,11 +85,11 @@ public class QuestionarioController {
         FacesContext context = FacesContext.getCurrentInstance();
         if(questionario_dao.excluirQuestionario(id)){
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Sucesso", "Questionário excluído com sucesso!"));
+            recuperarQuestionarios();
             FacesContext.getCurrentInstance().getExternalContext().redirect("inicial.xhtml");
         }else{
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"ERRO", "Erro na exclusão do questionário!"));
         }
-        recuperarQuestionarios();
     }
     
     public void atualizarQuestionario() throws IOException{
