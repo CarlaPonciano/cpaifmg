@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" 	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Visualizar Respostas | Sistema CPA</title>
+</h:head>
+<h:body>
+<p:growl id="growl1" showDetail="true"  keepAlive="1000"  /> 
+	---Visualizar Respostas---<br/><br/>
+        <p:dataTable var="ATUAL_Q" value="#{questionarioController.lista_questionario}">
+            <p:column headerText="Questionário">
+                <h:outputText value="#{ATUAL_Q.nome}" /><br/><br/>
+            </p:column>
+            <p:column headerText="Total Respostas">
+                <h:outputText value="#{ATUAL_Q.quant_respostas}" /><br/><br/>
+            </p:column>
+        </p:dataTable> <br/>
+        ---Respostas Questionários---<br/><br/>
+        <p:dataTable var="ATUAL_R" value="#{respostaQuestionarioController.lista_resposta_questionario}">
+            <p:column headerText="Questionário">
+                <h:outputText value="#{ATUAL_R.nome_questionario}" /><br/><br/>
+            </p:column>
+            <p:column headerText="Campus">
+                <h:outputText value="#{ATUAL_R.campus}" /><br/><br/>
+            </p:column>
+            <p:column headerText="Curso">
+                <h:outputText value="#{ATUAL_R.curso}" /><br/><br/>
+            </p:column>
+            <p:column headerText="Disciplina">
+                <h:outputText value="#{ATUAL_R.disciplina}" /><br/><br/>
+            </p:column>
+            <p:column headerText="Semestre">
+                <h:outputText value="#{ATUAL_R.semestre_marcado}" /><br/><br/>
+            </p:column>
+            <p:column headerText="Nome">
+                <h:outputText value="#{ATUAL_R.nome}" /><br/><br/>
+            </p:column>
+            <p:column headerText="Perguntas/Respostas">
+            <p:dataTable var="ATUAL_PR" value="#{respostaQuestionarioController.recuperarRespostasQuestionarioPerguntaResposta(ATUAL_R.id)}">
+                    <p:column headerText="P">
+                        <h:outputText value="#{ATUAL_PR.pergunta}" />
+                    </p:column>
+                    <p:column headerText="R">
+                        <h:outputText value="#{ATUAL_PR.resposta}" />
+                    </p:column>
+                </p:dataTable>
+            </p:column>
+            <p:column headerText="Observações">
+                <h:outputText value="#{ATUAL_R.observacoes}" /><br/><br/>
+            </p:column>
+        </p:dataTable> <br/>
+</h:body>
+</html>

@@ -12,7 +12,8 @@
     <p:growl id="growl1" showDetail="true"  keepAlive="1000"  /> 
 	---Questionário---<br/><br/>
         <h:form>
-            <h:commandButton value="Cadastrar" action="cadastrarQuestionario.xhtml"></h:commandButton><br/><br/>
+            <h:commandButton value="Cadastrar" action="cadastrarQuestionario.xhtml"></h:commandButton> .
+            <h:commandButton value="Visualizar Respostas" action="visualizarRespostas.xhtml" ></h:commandButton> <br/><br/>
             <!--Tabela listando os questionário cadastrados-->
             ---Questionários Cadastrados---<br/><br/>
             <p:dataTable var="ATUAL" value="#{questionarioController.lista_questionario}">
@@ -46,7 +47,7 @@
                 
                 <p:column headerText="Ações">
                     <h:commandButton value="Editar" onclick="#{questionarioController.setId_questionario_editar(ATUAL.id)}" action="editarQuestionario.xhtml"></h:commandButton> .
-                    <h:commandButton value="Excluir" action="#{questionarioController.excluirQuestionario(ATUAL.id)}"></h:commandButton>
+                    <h:commandButton value="Excluir" action="#{questionarioController.excluirQuestionario(ATUAL.id)}"></h:commandButton><br/><br/>
                 </p:column>
             </p:dataTable> <br/>
         </h:form>

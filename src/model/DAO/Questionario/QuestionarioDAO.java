@@ -96,7 +96,7 @@ public class QuestionarioDAO {
     }
     
     public List<QuestionarioDomain> recuperarQuestionariosAtivos(){
-        String sql = "SELECT * FROM questionario_tipoquestionario_status WHERE status = 'Ativo';";
+        String sql = "SELECT * FROM questionario_tipoquestionario_status_quantrespostas WHERE status = 'Ativo';";
         try{
             Connection con = ConnectionPostgreSQL.getInstance().getConnection();
             Statement stm = con.createStatement();

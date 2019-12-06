@@ -33,6 +33,7 @@ public class RespostaQuestionarioController{
     public RespostaQuestionarioDomain resposta_questionario;
     private List<PerguntaDomain> lista_pergunta = new ArrayList();
     private List<RespostaDomain> lista_resposta = new ArrayList();
+    private List<RespostaQuestionarioDomain> lista_resposta_questionario = new ArrayList();
     private List<RespostaMarcadaDomain> lista_resposta_marcada = new ArrayList();
     private int idRespostaSelecionada;
 
@@ -40,6 +41,7 @@ public class RespostaQuestionarioController{
         resposta_questionario = new RespostaQuestionarioDomain();
         recuperarPerguntas();
         recuperarRespostas();
+        recuperarRespostasQuestionario();
     }
 
     public RespostaQuestionarioDomain getResposta_questionario() {
@@ -73,6 +75,14 @@ public class RespostaQuestionarioController{
     public void setIdRespostaSelecionada(int idRespostaSelecionada) {
         this.idRespostaSelecionada = idRespostaSelecionada;
     }
+
+    public List<RespostaQuestionarioDomain> getLista_resposta_questionario() {
+        return lista_resposta_questionario;
+    }
+
+    public void setLista_resposta_questionario(List<RespostaQuestionarioDomain> lista_resposta_questionario) {
+        this.lista_resposta_questionario = lista_resposta_questionario;
+    }
     
     public List<PerguntaDomain> recuperarPerguntas(){
         PerguntaDAO pergunta_dao = new PerguntaDAO();
@@ -98,6 +108,7 @@ public class RespostaQuestionarioController{
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"ERRO", "Erro no cadastro da resposta do questionário!"));
         }
         QuestionarioController.recuperarQuestionarios();
+        recuperarRespostasQuestionario();
     }
     
     public void respondeuQuestao(int idPergunta){
@@ -121,5 +132,27 @@ public class RespostaQuestionarioController{
         }
         if(flag) lista_resposta_marcada.add(resposta_marcada);
     }
+    
+    public List<RespostaQuestionarioDomain> recuperarRespostasQuestionario(){
+        RespostaQuestionarioDAO resposta_questionario_dao = new RespostaQuestionarioDAO();
+        setLista_resposta_questionario(resposta_questionario_dao.recuperarRespostas());
+        return lista_resposta_questionario;
+    }
+    public List<RespostaMarcadaDomain> recuperarRespostasQuestionarioPerguntaResposta(int respostaquestionario_id){
+        for(RespostaQuestionarioDomain lista_resposta : lista_resposta_questionario){
+            List<RespostaMarcadaDomain> lista_pr = lista_resposta.getResposta_marcada();
+            for(RespostaMarcadaDomain lista_resposta_pr : lista_pr){
+                if(lista_resposta.getId() == respostaquestionario_id){
+                    return lista_pr;
+                }
+            }
+        }
+        return null;
+    }
+    
+    
+    /*public List<RespostaMarcadaDomain> recuperarRespostasQuestionarioId(int questionario_id){
+        return lista_resposta_questionario.get(getLista_resposta_questionario());
+    }*/
     
 }

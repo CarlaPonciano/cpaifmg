@@ -12,14 +12,17 @@ package model.Domain.RespostaQuestionario;
 public class RespostaMarcadaDomain {
     private int id;
     private int respostaquestionario_id;
+    private String pergunta, resposta;
     private int id_pergunta;
     private int id_resposta;
 
     public RespostaMarcadaDomain() {}
 
-    public RespostaMarcadaDomain(int id, int respostaquestionario_id, int id_pergunta, int id_resposta) {
+    public RespostaMarcadaDomain(int id, int respostaquestionario_id, String pergunta, String resposta, int id_pergunta, int id_resposta) {
         this.id = id;
         this.respostaquestionario_id = respostaquestionario_id;
+        this.pergunta = pergunta;
+        this.resposta = resposta;
         this.id_pergunta = id_pergunta;
         this.id_resposta = id_resposta;
     }
@@ -55,5 +58,20 @@ public class RespostaMarcadaDomain {
     public void setId_resposta(int id_resposta) {
         this.id_resposta = id_resposta;
     }
-    
+
+    public String getPergunta() {
+        return pergunta;
+    }
+
+    public void setPergunta(String pergunta) {
+        this.pergunta = pergunta;
+    }
+
+    public String getResposta() {
+        return resposta;
+    }
+
+    public void setResposta(String resposta) {
+        this.resposta = resposta;
+    }
 }

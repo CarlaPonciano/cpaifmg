@@ -20,11 +20,15 @@ public class RespostaQuestionarioDomain {
     private int id_opcao_campus;
     private String nome;
     private String observacoes;
+    private String campus;
+    private String curso;
+    private String disciplina;
+    private String nome_questionario;
     private List<RespostaMarcadaDomain> resposta_marcada;
 
     public RespostaQuestionarioDomain() {}
 
-    public RespostaQuestionarioDomain(int id, int questionario_id, String semestre_marcado, int id_opcao_disciplina, int id_opcao_curso, int id_opcao_campus, String nome, String observacoes, List<RespostaMarcadaDomain> resposta_marcada) {
+    public RespostaQuestionarioDomain(int id, int questionario_id, String semestre_marcado, int id_opcao_disciplina, int id_opcao_curso, int id_opcao_campus, String nome, String observacoes, String campus, String curso, String disciplina, String nome_questionario, List<RespostaMarcadaDomain> resposta_marcada) {
         this.id = id;
         this.questionario_id = questionario_id;
         this.semestre_marcado = semestre_marcado;
@@ -33,6 +37,10 @@ public class RespostaQuestionarioDomain {
         this.id_opcao_campus = id_opcao_campus;
         this.nome = nome;
         this.observacoes = observacoes;
+        this.campus = campus;
+        this.curso = curso;
+        this.disciplina = disciplina;
+        this.nome_questionario = nome_questionario;
         this.resposta_marcada = resposta_marcada;
     }
 
@@ -106,6 +114,38 @@ public class RespostaQuestionarioDomain {
 
     public void setResposta_marcada(List<RespostaMarcadaDomain> resposta_marcada) {
         this.resposta_marcada = resposta_marcada;
+    }
+
+    public String getCampus() {
+        return campus;
+    }
+
+    public void setCampus(String campus) {
+        this.campus = campus;
+    }
+
+    public String getCurso() {
+        return curso;
+    }
+
+    public void setCurso(String curso) {
+        this.curso = curso;
+    }
+
+    public String getDisciplina() {
+        return disciplina;
+    }
+
+    public void setDisciplina(String disciplina) {
+        this.disciplina = disciplina;
+    }
+
+    public String getNome_questionario() {
+        return nome_questionario;
+    }
+
+    public void setNome_questionario(String nome_questionario) {
+        this.nome_questionario = nome_questionario;
     }
     
 }
