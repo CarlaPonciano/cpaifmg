@@ -20,7 +20,6 @@
             <br/><br/>
             <h:outputLabel>Informe o nome do questionário: </h:outputLabel>  <h:inputText value="#{questionarioController.questionario.nome}"/> <br/><br/>
             <h:outputLabel>Informe a descrição do questionário: </h:outputLabel>  <h:inputText value="#{questionarioController.questionario.descricao}"/> <br/><br/>
-            <h:outputLabel>Informe o nome do criador do questionário: </h:outputLabel>  <h:inputText value="#{questionarioController.questionario.criador}"/> <br/><br/>
             Selecione o status do questionário: 
             <h:selectOneMenu value="#{questionarioController.questionario.status_id}">
                 <f:selectItems value="#{statusQuestionarioController.lista_status}" var="ATUAL" itemValue="#{ATUAL.id}" itemLabel="#{ATUAL.status}">

@@ -7,7 +7,6 @@ package controller.Usuario;
 
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpSession;
 import model.Domain.Usuario.UsuarioDomain;
     
 public class SessionContext {

@@ -94,6 +94,7 @@ public class QuestionarioController {
     
     public void atualizarQuestionario() throws IOException{
         questionario.setId(id_questionario_editar);
+        questionario.setCriador(UsuarioController.recuperarSessaoNomeUsuario());
         QuestionarioDAO questionario_dao = new QuestionarioDAO();
         FacesContext context = FacesContext.getCurrentInstance();
         if(questionario_dao.atualizarQuestionario(questionario)){

@@ -26,6 +26,7 @@ public class UsuarioController{
 
     public UsuarioController() {
         usuario = new UsuarioDomain();
+        sessao = null;
         recuperarUsuario();
     }
 
@@ -37,8 +38,12 @@ public class UsuarioController{
         this.usuario = usuario;
     }
 
-    public void setSessao(UsuarioDomain sessao) {
-        this.sessao = sessao;
+    public static UsuarioDomain getSessao() {
+        return sessao;
+    }
+
+    public static void setSessao(UsuarioDomain sessao) {
+        UsuarioController.sessao = sessao;
     }
     
     public void persistirUsuario() throws IOException{
@@ -111,9 +116,7 @@ public class UsuarioController{
     }
     
     public static String recuperarSessaoNomeUsuario(){
-        if(sessao != null)
-            return sessao.getUsuario();
-        return "Não Logado!";
+        return SessionContext.getInstance().getUsuarioLogado().getUsuario();
     }
     
     public boolean estaLogado(){

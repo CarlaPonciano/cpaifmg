@@ -14,7 +14,7 @@
         ---Login--- <br/><br/>
         <h:form>
             <h:outputLabel>Nome de usuário: </h:outputLabel><h:inputText value="#{usuarioController.usuario.usuario}"/><br/><br/>
-            <h:outputLabel>Senha: </h:outputLabel><h:inputText value="#{usuarioController.usuario.senha}"/><br/><br/>
+            <h:outputLabel>Senha: </h:outputLabel><h:inputSecret value="#{usuarioController.usuario.senha}"/><br/><br/>
             <h:commandButton value="Fazer Login" action="#{usuarioController.login()}"/><br/>
         </h:form>
     </h:body>

@@ -10,8 +10,8 @@
 </h:head>
 <h:body>
 <p:growl id="growl1" showDetail="true"  keepAlive="1000"  /> 
-	---Sistema CPA--- <br/><br/>
         <h:form>
+            ---Sistema CPA--- <br/><br/><h:commandButton value="Página Inicial" action="index.xhtml"></h:commandButton><br/><br/>
             ---Disciplina--- <br/><br/>
             <h:commandButton value="Cadastrar Disciplina" action="Disciplina/cadastrarDisciplina.xhtml"></h:commandButton> <br/><br/>
             <p:dataTable var="ATUAL_D" value="#{disciplinaController.lista_disciplina}">
