@@ -97,7 +97,7 @@ public class UsuarioController{
         FacesContext context = FacesContext.getCurrentInstance();
         if (usuario_dao.ativarUsuario(usuario)) {
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Conta ativado com sucesso!"));
-            FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
+            FacesContext.getCurrentInstance().getExternalContext().redirect("../index.xhtml");
         } else {
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERRO", "Erro ao ativar conta!"));
         }
