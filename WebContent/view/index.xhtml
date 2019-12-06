@@ -12,13 +12,13 @@
         ---Sistema CPA--- <br/><br/>
         <h:form>
             <h:outputLabel>Olá </h:outputLabel><h:inputText value="#{usuarioController.sessao.usuario}" /><br/><br/>
-            <h:commandButton value="Gerenciar Questionários" action="Questionario/inicial.xhtml"></h:commandButton> <br/><br/>
-            <h:commandButton value="Cadastrar Nova Questão" action="Pergunta/cadastrarPergunta.xhtml"></h:commandButton> <br/><br/>
-            <h:commandButton value="Gerenciar Campus, Cursos e Disciplinas" action="campusCursoDisciplina.xhtml"></h:commandButton> <br/><br/>
-            <h:commandButton value="Criar Conta" action="Usuario/cadastrarUsuario.xhtml"></h:commandButton> .
-            <h:commandButton value="Fazer Login" action="Usuario/login.xhtml"></h:commandButton> . 
-            <h:commandButton value="Editar Conta" action="Usuario/editarUsuario.xhtml"></h:commandButton><br/><br/>
-            <h:commandButton value="Responder Questionários" action="RespostaQuestionario/responderQuestionario.xhtml"></h:commandButton><br/><br/>
+            <h:commandButton rendered="#{usuarioController.sessao != true}" value="Gerenciar Questionários" action="Questionario/inicial.xhtml"></h:commandButton> <br/><br/>
+            <h:commandButton rendered="#{usuarioController.sessao != true}" value="Cadastrar Nova Questão" action="Pergunta/cadastrarPergunta.xhtml"></h:commandButton> <br/><br/>
+            <h:commandButton rendered="#{usuarioController.sessao != true}" value="Gerenciar Campus, Cursos e Disciplinas" action="campusCursoDisciplina.xhtml"></h:commandButton> <br/><br/>
+            <h:commandButton rendered="#{usuarioController.sessao != false}" value="Criar Conta" action="Usuario/cadastrarUsuario.xhtml"></h:commandButton> .
+            <h:commandButton rendered="#{usuarioController.sessao != false}" value="Fazer Login" action="Usuario/login.xhtml"></h:commandButton> . 
+            <h:commandButton rendered="#{usuarioController.sessao != true}" value="Editar Conta" action="Usuario/editarUsuario.xhtml"></h:commandButton><br/><br/>
+            <h:commandButton rendered="#{usuarioController.sessao != true}" value="Responder Questionários" action="RespostaQuestionario/responderQuestionario.xhtml"></h:commandButton><br/><br/>
         </h:form>
     </h:body>
 </html>
