@@ -22,7 +22,7 @@ import model.Domain.TipoPergunta.TipoPerguntaDomain;
 public class PerguntaDAO {
     public boolean cadastrarPergunta(PerguntaDomain pergunta){
         String sql = "INSERT INTO pergunta (pergunta, tipopergunta_id) VALUES "
-                        + "('" + pergunta.getPergunta() + "', " + pergunta.getTipoPergunta().getId() + ");";
+                        + "('" + pergunta.getPergunta() + "', " + pergunta.getTipopergunta_id() + ");";
         try{
             Connection con = ConnectionPostgreSQL.getInstance().getConnection();
             Statement stm = con.createStatement();
@@ -30,6 +30,7 @@ public class PerguntaDAO {
             return true;
         }catch(SQLException e){
             System.out.println("Erro no cadastro da quest„o!");
+            System.out.println(sql);
             System.out.println(e.getMessage());
             return false;
         }
@@ -60,7 +61,7 @@ public class PerguntaDAO {
             }
             return lista_pergunta;
         }catch(SQLException e){
-            System.out.println("Erro na recupera√ß„o das quest√µes!");
+            System.out.println("Erro na recuperaÁ„o das questıes!");
             System.out.println(e.getMessage());
             return null;
         }

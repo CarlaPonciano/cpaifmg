@@ -13,11 +13,11 @@
         ---Cadastrar Questão--- <br/>
         <h:form>
             Selecione o tipo da questão: <br/><br/>
-            <h:selectManyCheckbox value="#{tipoPerguntaController.recuperarTipoPergunta}">
-                <f:selectItem itemValue="#{tipoPerguntaController.tp.id} - #{tipoQuestionarioController.tp.tipo}"/>
-            </h:selectManyCheckbox>
+            <h:selectOneMenu value="#{perguntaController.pergunta.tipopergunta_id}">
+                <f:selectItems value="#{tipoPerguntaController.lista_tipo_pergunta}" var="ATUAL" itemValue="#{ATUAL.id}" itemLabel="#{ATUAL.tipo}"/>
+            </h:selectOneMenu><br/><br/>
 
-            Informe a questão: <h:inputText/> <br/><br/>
+            <h:outputLabel>Informe a questão: </h:outputLabel>  <h:inputText value="#{perguntaController.pergunta.pergunta}"/> <br/><br/>
             <h:commandButton value="Cadastrar Questão" action="#{perguntaController.cadastrarPergunta()}"></h:commandButton> <br/><br/>
         </h:form>
     </h:body>

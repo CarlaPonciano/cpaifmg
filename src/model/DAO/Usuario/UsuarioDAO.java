@@ -11,7 +11,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import model.Connection.ConnectionPostgreSQL;
-import model.Connection.SessionUtil;
 import model.Domain.Usuario.UsuarioDomain;
 
 /**

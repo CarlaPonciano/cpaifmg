@@ -24,6 +24,7 @@ public class TipoQuestionarioDAO {
         String sql = "INSERT INTO tipoquestionario(nome, descricao, tipopergunta_id) VALUES "
                         + "('" + tipo_questionario.getNome() + "', '" + tipo_questionario.getDescricao() + "', "
                         + tipo_questionario.getTipo_pergunta_id() + ");";
+        System.out.println(sql);
         try{
             Connection con = ConnectionPostgreSQL.getInstance().getConnection();
             Statement stm = con.createStatement();

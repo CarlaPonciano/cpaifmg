@@ -31,16 +31,21 @@ public class QuestionarioController {
 
     public QuestionarioController() {
         questionario = new QuestionarioDomain();
-        recuperarQuestionarios();
-        recuperarQuestionariosAtivos();
+        if(UsuarioController.getSessao() != null){
+            recuperarQuestionariosUsuario();
+            recuperarQuestionariosAtivos();
+        }else{
+            recuperarQuestionarios();
+        }
+        
     }
-    
-    public void setQuestionario(QuestionarioDomain questionario) {
-        this.questionario = questionario;
-    }
-    
+
     public QuestionarioDomain getQuestionario() {
         return questionario;
+    }
+
+    public void setQuestionario(QuestionarioDomain questionario) {
+        this.questionario = questionario;
     }
 
     public List<QuestionarioDomain> getLista_questionario() {
@@ -73,7 +78,7 @@ public class QuestionarioController {
         FacesContext context = FacesContext.getCurrentInstance();
         if(questionario_dao.cadastrarQuestionario(questionario)){
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Sucesso", "Questionário cadastrado com sucesso!"));
-            recuperarQuestionarios();
+            recuperarQuestionariosUsuario();
             FacesContext.getCurrentInstance().getExternalContext().redirect("inicial.xhtml");
         }else{
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"ERRO", "Erro no cadastro do questionário!"));
@@ -85,7 +90,7 @@ public class QuestionarioController {
         FacesContext context = FacesContext.getCurrentInstance();
         if(questionario_dao.excluirQuestionario(id)){
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Sucesso", "Questionário excluído com sucesso!"));
-            recuperarQuestionarios();
+            recuperarQuestionariosUsuario();
             FacesContext.getCurrentInstance().getExternalContext().redirect("inicial.xhtml");
         }else{
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"ERRO", "Erro na exclusão do questionário!"));
@@ -103,7 +108,13 @@ public class QuestionarioController {
         }else{
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"ERRO", "Erro na atualização do questionário!"));
         }
-        recuperarQuestionarios();
+        recuperarQuestionariosUsuario();
+    }
+    
+    public static List<QuestionarioDomain> recuperarQuestionariosUsuario(){
+        QuestionarioDAO questionario_dao = new QuestionarioDAO();
+        setLista_questionario(questionario_dao.recuperarQuestionariosUsuario());
+        return lista_questionario;
     }
     
     public static List<QuestionarioDomain> recuperarQuestionarios(){

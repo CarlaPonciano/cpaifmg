@@ -15,13 +15,23 @@ public class PerguntaDomain {
     private int id;
     private String pergunta;
     private TipoPerguntaDomain tipoPergunta;
+    private int tipopergunta_id;
 
     public PerguntaDomain() {}
 
-    public PerguntaDomain(int id, String pergunta, TipoPerguntaDomain tipoPergunta) {
+    public PerguntaDomain(int id, String pergunta, TipoPerguntaDomain tipoPergunta, int tipopergunta_id) {
         this.id = id;
         this.pergunta = pergunta;
         this.tipoPergunta = tipoPergunta;
+        this.tipopergunta_id = tipopergunta_id;
+    }
+
+    public int getTipopergunta_id() {
+        return tipopergunta_id;
+    }
+
+    public void setTipopergunta_id(int tipopergunta_id) {
+        this.tipopergunta_id = tipopergunta_id;
     }
 
     public TipoPerguntaDomain getTipoPergunta() {

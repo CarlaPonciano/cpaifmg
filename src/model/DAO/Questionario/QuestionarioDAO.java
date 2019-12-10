@@ -85,7 +85,7 @@ public class QuestionarioDAO {
         }
     }
     
-    public List<QuestionarioDomain> recuperarQuestionarios(){
+    public List<QuestionarioDomain> recuperarQuestionariosUsuario(){
         String sql = "SELECT * FROM questionario_tipoquestionario_status_quantrespostas WHERE usuario_usuario = '" + UsuarioController.recuperarSessaoNomeUsuario() + "';";
         try{
             Connection con = ConnectionPostgreSQL.getInstance().getConnection();
@@ -99,6 +99,32 @@ public class QuestionarioDAO {
                 questionario.setNome(rs.getString("nome"));
                 questionario.setDescricao(rs.getString("descricao"));
                 questionario.setCriador(rs.getString("usuario_usuario"));
+                questionario.setTipo_questionario(rs.getString("tipo_questionario"));
+                questionario.setStatus(rs.getString("status"));
+                questionario.setQuant_respostas(rs.getInt("quant_respostas"));
+                lista_questionario.add(questionario);
+            }
+            return lista_questionario;
+        }catch(SQLException e){
+            System.out.println("Erro na recuperação dos questionários!");
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
+    
+    public List<QuestionarioDomain> recuperarQuestionarios(){
+        String sql = "SELECT * FROM questionario_tipoquestionario_status_quantrespostas;";
+        try{
+            Connection con = ConnectionPostgreSQL.getInstance().getConnection();
+            Statement stm = con.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            QuestionarioDomain questionario;
+            List<QuestionarioDomain> lista_questionario = new ArrayList();
+            while(rs.next()){
+                questionario = new QuestionarioDomain();
+                questionario.setId(rs.getInt("id"));
+                questionario.setNome(rs.getString("nome"));
+                questionario.setDescricao(rs.getString("descricao"));
                 questionario.setTipo_questionario(rs.getString("tipo_questionario"));
                 questionario.setStatus(rs.getString("status"));
                 questionario.setQuant_respostas(rs.getInt("quant_respostas"));

@@ -37,7 +37,7 @@ public class UsuarioController{
     public void setUsuario(UsuarioDomain usuario) {
         this.usuario = usuario;
     }
-
+    
     public static UsuarioDomain getSessao() {
         return sessao;
     }

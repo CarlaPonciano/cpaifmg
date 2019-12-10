@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" 	xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
-    <h:head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Criar Conta | Sistema CPA</title>
-    </h:head>
-    <h:body>
-        <p:growl id="growl1" showDetail="true"  keepAlive="1000"  /> 
-        ---Crie sua Conta--- <br/><br/>
-        <h:form>
-            <h:outputLabel>Nome: </h:outputLabel><h:inputText size="20" value="#{usuarioController.usuario.nome}" /><br/><br/>
-            <h:outputLabel>Sobrenome: </h:outputLabel><h:inputText value="#{usuarioController.usuario.sobrenome}"/><br/><br/>
-            <h:outputLabel>E-mail: </h:outputLabel><h:inputText value="#{usuarioController.usuario.email}"/><br/><br/>
-            <h:outputLabel>Nome de usuário: </h:outputLabel><h:inputText value="#{usuarioController.usuario.usuario}"/><br/><br/>
-            <h:outputLabel>Senha: </h:outputLabel><h:inputText value="#{usuarioController.usuario.senha}"/><br/><br/>
-            <h:commandButton value="Criar Conta"  action="#{usuarioController.persistirUsuario()}"/><br/><br/>
-        </h:form>
-    </h:body>
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Criar Conta | Sistema CPA</title>
+</h:head>
+<h:body>
+    <p:growl id="growl1" showDetail="true"  keepAlive="1000"  /> 
+    ---Crie sua Conta--- <br/><br/>
+    <h:form>
+        <h:outputLabel>Nome: </h:outputLabel><h:inputText size="20" value="#{usuarioController.usuario.nome}" /><br/><br/>
+        <h:outputLabel>Sobrenome: </h:outputLabel><h:inputText value="#{usuarioController.usuario.sobrenome}"/><br/><br/>
+        <h:outputLabel>E-mail: </h:outputLabel><h:inputText value="#{usuarioController.usuario.email}"/><br/><br/>
+        <h:outputLabel>Nome de usuário: </h:outputLabel><h:inputText value="#{usuarioController.usuario.usuario}"/><br/><br/>
+        <h:outputLabel>Senha: </h:outputLabel><h:inputText value="#{usuarioController.usuario.senha}"/><br/><br/>
+        <h:commandButton value="Criar Conta"  action="#{usuarioController.persistirUsuario()}"/><br/><br/>
+    </h:form>
+</h:body>
 </html>
